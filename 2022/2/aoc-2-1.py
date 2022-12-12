@@ -23,9 +23,7 @@ def input_to_tuples(lines):
 def line_to_tuple(line):
     return (line[0], line[2])
 
-
-stdin = sys.stdin.read().splitlines()
-
+stdin = map(str.rstrip, sys.stdin)
 tuples = input_to_tuples(stdin)
 scores = tuples_to_scores(tuples, lookup)
 
