@@ -12,7 +12,7 @@ def input_to_elves(lines):
         if not key:
             yield map(int, group)
 
-stdin = sys.stdin.read().splitlines()
+stdin = map(str.rstrip, sys.stdin)
 
 elves = input_to_elves(stdin)
 
