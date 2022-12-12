@@ -4,12 +4,12 @@ import sys
 
 def find_common(pair):
     s1, s2 = pair
-    x = list(set(s1) & set(s2))[0]
-    return x
+    # we're only expecting one overlap
+    return next(iter(set(s1) & set(s2)))
 
 def half_line(s):
-    n = int(len(s) / 2)
-    return (s[0:n], s[n:])
+    n = len(s) // 2
+    return s[0:n], s[n:]
 
 def score(c):
     if c >= 'a' and c <= 'z':
@@ -17,7 +17,7 @@ def score(c):
     else:
         return ord(c) - ord('A') + 27
 
-stdin = sys.stdin.read().splitlines()
+stdin = map(str.rstrip, sys.stdin)
 half_lines = map(half_line, stdin)
 common = map(find_common, half_lines)
 scores = map(score, common)

@@ -4,13 +4,15 @@ import sys
 
 def find_common(l):
     s1, s2, s3 = l
-    x = list(set(s1) & set(s2) & set(s3))[0]
-    return x
+    return next(iter(set(s1) & set(s2) & set(s3)))
 
 def sub_lists(l, size):
-    while len(l) > 0:
-        yield l[0:size]
-        l = l[size:]
+    r = []
+    for e in l:
+        if len(r) == size:
+            yield r
+            r = []
+        r.append(e)
 
 def score(c):
     if c >= 'a' and c <= 'z':
@@ -18,7 +20,7 @@ def score(c):
     else:
         return ord(c) - ord('A') + 27
 
-stdin = sys.stdin.read().splitlines()
+stdin = map(str.rstrip, sys.stdin)
 triples = sub_lists(stdin, 3)
 common = map(find_common, triples)
 scores = map(score, common)
