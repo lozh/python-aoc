@@ -53,22 +53,17 @@ def parse_input(stdin):
 
 def apply_instruction(stacks, instruction):
     count, source, dest = instruction
-    print(f"{stacks}, {instruction}")
     pile = list(stacks[source][-count:])
-    print(pile)
     stacks[source] = stacks[source][0:-count]
     stacks[dest] = stacks[dest] + pile
     return stacks
 
-stdin = sys.stdin.read().splitlines()
+stdin = map(str.rstrip, sys.stdin)
 
 stacks, instructions = parse_input(stdin)
 
 for instruction in instructions:
     stacks = apply_instruction(stacks, instruction)
 
-print(stacks)
 tops = map(lambda x: x.pop(), stacks)
 print(''.join(tops))
-
-

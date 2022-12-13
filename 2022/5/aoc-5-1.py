@@ -23,16 +23,16 @@ def parse_instruction(line):
     m = instruction_re.match(line)
     return int(m.group(1)), int(m.group(2)) - 1, int(m.group(3)) - 1
 
-def parse_input(stdin):
+def parse_input(lines):
     stacks = []
     instructions = []
     in_stack = True
     in_blank = False
-    for line in stdin:
+    for line in lines:
         if in_stack:
             if is_stack(line):
                 for id, letter in parse_stack(line):
-                    print(f"{id}, {letter}")
+                    # print(f"{id}, {letter}")
                     while len(stacks) <= id:
                         stacks.append([])
                     stacks[id].append(letter)
@@ -54,12 +54,12 @@ def parse_input(stdin):
 
 def apply_instruction(stacks, instruction):
     count, source, dest = instruction
-    for i in range(count):
+    for _ in range(count):
         l = stacks[source].pop()
         stacks[dest].append(l)
     return stacks
 
-stdin = sys.stdin.read().splitlines()
+stdin = map(str.rstrip, sys.stdin)
 
 stacks, instructions = parse_input(stdin)
 
