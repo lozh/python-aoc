@@ -23,12 +23,12 @@ def parse_instruction(line):
     m = instruction_re.match(line)
     return int(m.group(1)), int(m.group(2)) - 1, int(m.group(3)) - 1
 
-def parse_input(stdin):
+def parse_input(lines):
     stacks = []
     instructions = []
     in_stack = True
     in_blank = False
-    for line in stdin:
+    for line in lines:
         if in_stack:
             if is_stack(line):
                 for id, letter in parse_stack(line):
@@ -36,6 +36,7 @@ def parse_input(stdin):
                         stacks.append([])
                     stacks[id].append(letter)
             else:
+                # deal with blank stacks on the right only indicated by the numbers
                 for id, letter in parse_stack(line):
                     while len(stacks) <= id:
                         stacks.append([])
