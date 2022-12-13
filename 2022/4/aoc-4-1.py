@@ -15,7 +15,7 @@ def range_subset_of(r1, r2):
 def total_overlap(r1, r2):
     return range_subset_of (r1, r2) or range_subset_of(r2, r1)
 
-stdin = sys.stdin.read().splitlines()
+stdin = map(str.rstrip, sys.stdin)
 ranges = map(parse_input, stdin)
 
-print(len(list(filter(lambda t: total_overlap(t[0], t[1]), ranges))))
+print(sum(1 for _ in filter(lambda t: total_overlap(t[0], t[1]), ranges)))
