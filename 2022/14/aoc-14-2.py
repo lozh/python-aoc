@@ -44,6 +44,13 @@ def line_coords(start, end):
     yield from takewhile(lambda pos: pos != end, projection)
     yield end
 
+# Build grid. Just a map of (x, y) -> symbol
+def parse_rocks(lines):
+    for line in lines:
+        coords = parse_line(line)
+        for s, e in pairwise(coords):
+            yield from line_coords(s, e)
+
 # Returns the next position for sand falling
 # Same as input if it doesn't move
 def sand_next_pos(pos, grid):
@@ -74,15 +81,8 @@ def simulate(entry, grid, bottom):
         grid[s] = "."
         i += 1
 
-grid = {}
 entry = (500, 0)
-
-# Build grid. Just a map of (x, y) -> symbol
-for line in map(str.rstrip, sys.stdin):
-    coords = list(parse_line(line))
-    for s, e in pairwise(coords):
-        for c in line_coords(s, e):
-            grid[c] = "#"
+grid = {x:"#" for x in parse_rocks(map(str.rstrip, sys.stdin))}
 
 # Any sand that gets one under the level of the lowest rock stops:
 bottom = max(y for (x, y) in grid) + 1
