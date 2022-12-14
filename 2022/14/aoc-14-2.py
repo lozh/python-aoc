@@ -2,17 +2,34 @@
 
 import sys
 import re
+import operator
+from operator import add
+import itertools
+from itertools import takewhile, tee
 
 def tuple_add(x, y):
-    return tuple_map(sum, x, y)
+    return tuple_map(add, x, y)
 
-# operate on tuples by element
+# Operate on two tuples by element
 def tuple_map(f, x, y):
-    return tuple(map(f, zip(x, y)))
+    return tuple(f(a, b) for (a, b) in zip(x, y))
 
 def cmp(x, y):
     return (x > y) - (x < y)
 
+# This is in itertools in Python 3.10
+def pairwise(i):
+    a, b = tee(i)
+    next(b, None)
+    return zip(a, b)
+
+# Returns generator for x, f(x), f(f(x)), ...
+# There's a more concise notation for this in Python 3.10
+def iterate (f,x):
+    while True:
+        yield x
+        x = f(x)
+        
 coord_re = re.compile("^(\d+),(\d+)$")
 def parse_line(line):
     for coord in str.split(line, " -> "):
@@ -20,20 +37,15 @@ def parse_line(line):
         yield int(m.group(1)), int(m.group(2))
 
 def line_coords(start, end):
-    x1, y1 = start
-    x2, y2 = end
+    # Direction of the line to move from start to end
+    offset = tuple_map(cmp, end, start)
+    add_offset = lambda pos: tuple_add(pos, offset)
+    projection = iterate(add_offset, start)
+    yield from takewhile(lambda pos: pos != end, projection)
+    yield end
 
-    offset = (cmp(x2, x1), cmp(y2, y1))
-    yield start
-
-    while True:
-        start = tuple_add(start, offset) # add tuples elementwise
-        yield start
-        if start == end:
-            break
-
-# returns the next position for sand falling
-# same as input if it doesn't move
+# Returns the next position for sand falling
+# Same as input if it doesn't move
 def sand_next_pos(pos, grid):
     # possible routes down    
     offsets = [(0, 1), (-1, 1), (1, 1)]
@@ -51,7 +63,7 @@ def sand(start, grid, bottom):
             return pos
         start = pos
 
-# run the simulation
+# Run the simulation
 def simulate(entry, grid, bottom):
     i = 0
     while True:
@@ -65,13 +77,13 @@ def simulate(entry, grid, bottom):
 grid = {}
 entry = (500, 0)
 
-# build grid. Just a map of (x, y) -> symbol
+# Build grid. Just a map of (x, y) -> symbol
 for line in map(str.rstrip, sys.stdin):
     coords = list(parse_line(line))
-    for s, e in ((coords[i], coords[i+1]) for i in range(len(coords) - 1)):
+    for s, e in pairwise(coords):
         for c in line_coords(s, e):
             grid[c] = "#"
 
-# any sand that gets one under the level of the lowest rock stops:
+# Any sand that gets one under the level of the lowest rock stops:
 bottom = max(y for (x, y) in grid) + 1
 print(simulate(entry, grid, bottom))
