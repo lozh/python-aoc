@@ -72,6 +72,6 @@ for line in map(str.rstrip, sys.stdin):
         for c in line_coords(s, e):
             grid[c] = "#"
 
-# any sand that get to the level of the lowest rock is gone:
+# any sand that gets one under the level of the lowest rock stops:
 bottom = max(y for (x, y) in grid) + 1
 print(simulate(entry, grid, bottom))
