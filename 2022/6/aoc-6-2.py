@@ -2,16 +2,12 @@
 
 import sys
 
-stdin = sys.stdin.read().splitlines()
-line = stdin[0]
+def find_chunk(line, n):
+    chunk_count = len(line)
+    for i, s in [(i, line[i:i + n]) for i in range(chunk_count)]:
+        if len(set(s)) == n:
+            return i + n
 
-size = 14
-i = size
+line = sys.stdin.readline()
 
-while i < len(line):
-    s = line[i - size: i]
-    if (len(set(s)) == size):
-        print(i)
-        break
-    i = i + 1
-
+print(find_chunk(line, 14))
