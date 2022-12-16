@@ -16,29 +16,6 @@ class Valve:
     def __str__(self):
         return f"{{valve = {self.valve}, flow = {self.flow}, routes = {self.routes}}}"
 
-class Move:
-    def __init__(self, dest):
-        self.dest = dest
-
-class TurnValve:
-    def __init__(self, valve):
-        self.valve = valve
-
-class State:
-    # pos is a valve name
-    # moves is list of moves taken to get to this position
-    # 
-    def __init__(self, pos, moves, valves, valves_turned, remaining_mins, score):
-        self.pos = pos
-        self.moves = moves
-        self.valves = valves
-        self.valves_turned = valves_turned
-        self.remaining_mins = remaining_mins
-        self.score = score
-
-    def apply_move(self, move):
-        pass
-
 def parse_line(line):
     m = parse_re.match(line)
     if m:
@@ -114,11 +91,13 @@ def solve(valves, paths, unused, pos, minutes, score, target):
         unused.add(target)
     else:
         # We're not at our target
-        if valves[pos] in unused and valves[pos].flow >= valves[target].flow:
+        # We can try and short circuit here, but it doesn't make a
+        # practical difference on the input
+        # if valves[pos] in unused and valves[pos].flow >= valves[target].flow:
             # current node is better than where we're trying to go. can't be correct
-            return
-        else:
-            yield from solve(valves, paths, unused, paths[(pos, target)], minutes - 1, score, target)
+        #    return
+        # else:
+        yield from solve(valves, paths, unused, paths[(pos, target)], minutes - 1, score, target)
 
 
 valves = {x.valve:x for x in map(parse_line, sys.stdin)}
