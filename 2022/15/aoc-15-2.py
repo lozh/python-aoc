@@ -8,9 +8,11 @@ line_re = re.compile("^Sensor at x=(-?\d+), y=(-?\d+): closest beacon is at x=(-
 def parse_line(line):
     m = line_re.match(line)
     if (m):
+        sensor = (int(m.group(1)), int(m.group(2)))
+        beacon = (int(m.group(3)), int(m.group(4)))
         return {
-            "sensor": (int(m.group(1)), int(m.group(2))),
-            "beacon": (int(m.group(3)), int(m.group(4)))
+            "sensor": sensor,
+            "size": manhattan(sensor, beacon)
         }
     else:
         print(f"Cound not parse line: {line}")
@@ -26,8 +28,7 @@ def manhattan(pos1, pos2):
 # as far as beacon
 def sensor_cover_for_y(sensor_info, y, bound):
     sensor = sensor_info["sensor"]
-    beacon = sensor_info["beacon"]
-    size = manhattan(sensor, beacon)
+    size = sensor_info["size"]
     sx, sy = sensor
     ydist = manhattan(sensor, (sx, y))
     if ydist <= size:
