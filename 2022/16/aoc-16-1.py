@@ -2,8 +2,6 @@
 
 import sys
 import re
-import itertools
-from itertools import islice
 
 parse_re = re.compile("^Valve ([A-Z]+) has flow rate=(\d+); tunnels? leads? to valves? ([A-Z ,]+)$")
 
