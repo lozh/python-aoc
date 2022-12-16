@@ -26,9 +26,6 @@ def parse_line(line):
     print(f"Couldn't parse line: {line}")
     raise
 
-def max_flow(valves):
-    return max(v.flow for v in valves.values())
-
 # return first step to get from src to dest on a shortest path
 def path(valves, src, dest):
     len = 0
