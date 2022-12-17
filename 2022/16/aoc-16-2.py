@@ -106,7 +106,7 @@ def actors_strategy(paths, unused, actors):
 def solve(valves, paths, unused, actors, minutes, score):
     # We can't score any more if there are no unused valves
     # or we're in the last minute
-    if minutes < 0 or not unused:
+    if minutes <= 0 or not unused:
         yield score
         return
 
@@ -114,15 +114,15 @@ def solve(valves, paths, unused, actors, minutes, score):
         if a1.target == a2.target:
             # strategy has given same target to both actors (or both stopped)
             continue
-        new_actors = [copy(a1), copy(a2)]
-        used = set()
-        extra_score = 0
         # how many minutes can we tick just by following the current targets?
-        mins = min(actor.dist for actor in new_actors if actor.target)
+        mins = min(filter(lambda x: x != None, (a1.dist, a2.dist)))
         # don't have time to open another valve
         if minutes - mins - 1 < 0:
             yield score
             return
+        new_actors = [copy(a1), copy(a2)]
+        used = set()
+        extra_score = 0
         for actor in (actor for actor in new_actors if actor.target):
             if actor.dist == mins:
                 actor.dist = None
