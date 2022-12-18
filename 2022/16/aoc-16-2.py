@@ -3,7 +3,7 @@
 import sys
 import re
 import itertools
-from itertools import product, islice
+from itertools import product
 import copy
 from copy import copy
 
@@ -98,18 +98,24 @@ def actors_strategy(paths, unused, actors):
     x = map(lambda actor: actor_strategy(paths, unused, actor, actors), actors)
     return product(*x)
 
+max_score = 0
 # our strategy is to pick a next valve to open
 # if we're there then open it an then pick another
 # if we're not then pick a tunnel that takes us closer
-# if we're ever at a valve with more flow than the target
-# then abort
-def solve(valves, paths, unused, actors, minutes, score):
+# If we ever get to a point where even if we could open all remaining values now
+# the score would be lower than the best we have found then abort that branch
+def solve(valves, paths, unused, actors, minutes, score, energy):
     # We can't score any more if there are no unused valves
     # or we're in the last minute
+    global max_score
     if minutes <= 0 or not unused:
         yield score
         return
 
+    # This is a very rough calculation on the maximum possible remaining score
+    # It limits a lot of the search space
+    if score + minutes * energy < max_score:
+        return
     for a1, a2 in actors_strategy(paths, unused, actors):
         if a1.target == a2.target:
             # strategy has given same target to both actors (or both stopped)
@@ -123,20 +129,27 @@ def solve(valves, paths, unused, actors, minutes, score):
         new_actors = [copy(a1), copy(a2)]
         used = set()
         extra_score = 0
+        energy_used = 0
         for actor in (actor for actor in new_actors if actor.target):
             if actor.dist == mins:
                 actor.dist = None
                 flow = valves[actor.target].flow
                 extra_score += (minutes - mins) * flow
+                energy_used += flow
                 used.add(actor.target)
             elif actor.dist:
                 actor.dist -= mins + 1 # 1 extra step while the other actor opens a valve
-        yield from solve(valves, paths, unused - used, new_actors, minutes - mins - 1, score + extra_score)
+        for possible_score in solve(valves, paths, unused - used, new_actors, minutes - mins - 1, score + extra_score, energy - energy_used):
+            # Feels like we can do slightly better
+            # but as max_score is global, needs to escape the recursion
+            if possible_score >= max_score:
+                max_score = possible_score
+                yield possible_score
 
 valves = {x.valve:x for x in map(parse_line, sys.stdin)}
 paths = {k:v for k, v in build_paths(valves)}
 unused = {k for k, valve in valves.items() if valve.flow > 0}
+energy = sum(valve.flow for valve in valves.values())
 actors = [Actor(0, "AA", None), Actor(1, "AA", None)]
-ans = solve(valves, paths, unused, actors, 25, 0)
-print(max(islice(ans, 1000000)))
-#print(max(ans))
+ans = solve(valves, paths, unused, actors, 25, 0, energy)
+print(max(ans))
