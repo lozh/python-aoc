@@ -121,6 +121,6 @@ height = t_start
 stacks = (rock_count - r_start) // r_diff
 height += stacks * t_diff
 # number of additional rocks to finish
-rocks_left = ((rock_count - r_start) % r_diff) - 1
+rocks_left = ((rock_count - r_start - 1) % r_diff)
 height += seen[rocks_left]
 print(height)
