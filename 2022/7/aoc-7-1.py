@@ -2,6 +2,8 @@
 
 import sys
 import os
+import collections
+from collections import Counter
 
 def is_cmd(line):
     return line[0] == "$"
@@ -29,22 +31,13 @@ def directory_and_parents(directory):
     
 # output dict of {dir: size}
 def size_dirs(fs):
-    dirs = {}
+    dirs = Counter()
     for path in fs:
         is_dir, size = fs[path]
-        if is_dir:
-            for d in directory_and_parents(path):
-                if not d in dirs:
-                    dirs[d] = 0
-                else:
-                    pass
-        else:
+        if not is_dir:
             d = os.path.dirname(path)
             for d in directory_and_parents(d):
-                if not d in dirs:
-                    dirs[d] = size
-                else:
-                    dirs[d] = dirs[d] + size
+                dirs[d] += size;
     return dirs
         
     
