@@ -36,8 +36,6 @@ def size_dirs(fs):
             for d in directory_and_parents(path):
                 if not d in dirs:
                     dirs[d] = 0
-                else:
-                    pass
         else:
             d = os.path.dirname(path)
             for d in directory_and_parents(d):
@@ -49,11 +47,11 @@ def size_dirs(fs):
         
     
 # outputs dict of {path: (type, size)} for files
-def parse_input(stdin):
+def parse_input(lines):
     cd = "/"
     files = {}
     cmd = None
-    for line in stdin:
+    for line in lines:
         if is_cmd(line):
             cmd, arg = parse_cmd(line)
             if cmd == "cd":
@@ -63,19 +61,17 @@ def parse_input(stdin):
             else:
                 raise f"Unknown command {cmd} {args}"
         else:
-            if cmd == None:
+            if not cmd:
                 raise "Input started with a non-command"
             elif cmd == "cd":
                 raise "Output following cd command"
             else: #ls
                 path, is_dir, size = parse_ls_output(line, cd)
-                if path in files:
-                    pass
-                else:
+                if path not in files:
                     files[path] = is_dir, size
     return files
 
-stdin = sys.stdin.read().splitlines()
+stdin = map(str.rstrip, sys.stdin)
 fs = parse_input(stdin)
 dirs = size_dirs(fs)
 total_size = 70000000

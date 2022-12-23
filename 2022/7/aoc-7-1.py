@@ -49,11 +49,11 @@ def size_dirs(fs):
         
     
 # outputs dict of {path: (type, size)} for files
-def parse_input(stdin):
+def parse_input(lines):
     cd = "/"
     files = {}
     cmd = None
-    for line in stdin:
+    for line in lines:
         if is_cmd(line):
             cmd, arg = parse_cmd(line)
             if cmd == "cd":
@@ -75,7 +75,7 @@ def parse_input(stdin):
                     files[path] = is_dir, size
     return files
 
-stdin = sys.stdin.read().splitlines()
+stdin = map(str.rstrip, sys.stdin)
 fs = parse_input(stdin)
 dirs = size_dirs(fs)
 dirs = filter(lambda x: x <= 100000, dirs.values())
