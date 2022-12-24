@@ -5,7 +5,7 @@ import re
 import collections
 from collections import Counter
 import itertools
-from itertools import chain
+from itertools import chain, product
 
 # iterate faces as opposite corners ((x0, y0, z0), (x1, y1, z1)) with A0 <= A1
 # of a 1x1x1 cube starting at coord = (x, y, z)
@@ -25,15 +25,15 @@ def bounding_box(cubes, gap):
         min((y for x, y, z in cubes)) - gap,
         min((z for x, y, z in cubes)) - gap
     ), (
-        max((x for x, y, z in cubes)) + gap,
-        max((y for x, y, z in cubes)) + gap,
-        max((z for x, y, z in cubes)) + gap
+        max((x for x, y, z in cubes)) + gap + 1,
+        max((y for x, y, z in cubes)) + gap + 1,
+        max((z for x, y, z in cubes)) + gap + 1
     )
 
 def in_bound(cube, bounds):
     x, y, z = cube
     (x0, y0, z0), (x1, y1, z1) = bounds
-    return x >= x0 and x <= x1 and y >= y0 and y <= y1 and z >= z0 and z <= z1
+    return x >= x0 and x < x1 and y >= y0 and y < y1 and z >= z0 and z < z1
 
 def neighbours(cube):
     x, y, z = cube
@@ -61,13 +61,10 @@ def fill(start, cubes, bounds):
 def find_interior(cubes, exterior, bounds):
     ret = set()
     (x0, y0, z0), (x1, y1, z1) = bounds
-    for x in range(x0, x1 + 1):
-        for y in range(y0, y1 + 1):
-            for z in range(z0, z1 + 1):
-                if (x, y, z) not in cubes and (x, y, z) not in exterior:
-                    ret.add((x, y, z))
+    for c in product(range(x0, x1), range(y0, y1), range(z0, z1)):
+        if c not in cubes and c not in exterior:
+            ret.add(c)
     return ret
-    
 
 coord_re = re.compile("^(\d+),(\d+),(\d+)$")
 
