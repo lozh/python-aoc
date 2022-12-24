@@ -56,21 +56,25 @@ def parse_blueprint(line):
         geode_robot = ResourceSpec(ore = int(m.group(6)), obsidian = int(m.group(7)))
     )
 
+one_geode_robot = ResourceSpec(geode = 1)
+one_obsidian_robot = ResourceSpec(obsidian = 1)
+one_ore_robot = ResourceSpec(ore = 1)
+one_clay_robot = ResourceSpec(clay = 1)
 # yield the choices of next states
 def choices(blueprint, state):
     # If we can build a geode robot, then do that
     if state.resources.can_spend(blueprint.geode_robot):
-        yield State(state.resources - blueprint.geode_robot, state.robots + ResourceSpec(geode = 1)) #, state.moves + 'G')
+        yield State(state.resources - blueprint.geode_robot, state.robots + one_geode_robot) #, state.moves + 'G')
         return
     if state.resources.can_spend(blueprint.obsidian_robot):
-        yield State(state.resources - blueprint.obsidian_robot, state.robots + ResourceSpec(obsidian = 1)) #, state.moves + 'B')
+        yield State(state.resources - blueprint.obsidian_robot, state.robots + one_obsidian_robot) #, state.moves + 'B')
         return
     # can always choose to do nothing
     yield State(state.resources, state.robots) #, state.moves + 'N')
     if state.resources.can_spend(blueprint.ore_robot):
-        yield State(state.resources - blueprint.ore_robot, state.robots + ResourceSpec(ore = 1))# , state.moves + 'O')
+        yield State(state.resources - blueprint.ore_robot, state.robots + one_ore_robot) # , state.moves + 'O')
     if state.resources.can_spend(blueprint.clay_robot):
-        yield State(state.resources - blueprint.clay_robot, state.robots + ResourceSpec(clay = 1)) #, state.moves + 'C')
+        yield State(state.resources - blueprint.clay_robot, state.robots + one_clay_robot) #, state.moves + 'C')
 
 def simulate(blueprint, state, minutes):
     if minutes == 0:
