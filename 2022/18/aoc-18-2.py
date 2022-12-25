@@ -18,7 +18,7 @@ def faces(coord):
     yield (x, y + 1, z), (x + 1, y + 1, z + 1)
     yield (x, y, z + 1), (x + 1, y + 1, z + 1)
 
-# Get a bounding box with a 
+# Get a bounding box with a gap
 def bounding_box(cubes, gap):
     return (
         min((x for x, y, z in cubes)) - gap,
