@@ -3,6 +3,7 @@
 import sys
 import re
 from dataclasses import dataclass
+from time import sleep
 
 @dataclass
 class ResourceSpec:
@@ -42,7 +43,6 @@ class Blueprint:
 class State:
     resources: ResourceSpec
     robots: ResourceSpec
-    # moves: list
 
 blueprint_re = re.compile("^Blueprint (\d+): Each ore robot costs (\d+) ore\. Each clay robot costs (\d+) ore\. Each obsidian robot costs (\d+) ore and (\d+) clay\. Each geode robot costs (\d+) ore and (\d+) obsidian\.$")
 
@@ -60,44 +60,79 @@ one_geode_robot = ResourceSpec(geode = 1)
 one_obsidian_robot = ResourceSpec(obsidian = 1)
 one_ore_robot = ResourceSpec(ore = 1)
 one_clay_robot = ResourceSpec(clay = 1)
-# yield the choices of next states
-def choices(blueprint, state):
-    # If we can build a geode robot, then do that
-    if state.resources.can_spend(blueprint.geode_robot):
-        yield State(state.resources - blueprint.geode_robot, state.robots + one_geode_robot) #, state.moves + 'G')
-        return
-    if state.resources.can_spend(blueprint.obsidian_robot):
-        yield State(state.resources - blueprint.obsidian_robot, state.robots + one_obsidian_robot) #, state.moves + 'B')
-        return
-    # can always choose to do nothing
-    yield State(state.resources, state.robots) #, state.moves + 'N')
-    if state.resources.can_spend(blueprint.ore_robot):
-        yield State(state.resources - blueprint.ore_robot, state.robots + one_ore_robot) # , state.moves + 'O')
-    if state.resources.can_spend(blueprint.clay_robot):
-        yield State(state.resources - blueprint.clay_robot, state.robots + one_clay_robot) #, state.moves + 'C')
 
-def simulate(blueprint, state, minutes):
+max_geodes = 0
+
+# imagine we could create a new geode robot every turn from here
+# how many geodes would we end up with
+def max_geode_from(current, robots, minutes):
+    return current + robots * minutes + (minutes * (minutes - 1) >> 1)
+    
+def goals(blueprint, state):
+    # what could we aim to build next
+    if state.robots.obsidian > 0:
+        yield blueprint.geode_robot, one_geode_robot
+    if state.robots.clay > 0:
+        yield blueprint.obsidian_robot, one_obsidian_robot
+    yield blueprint.clay_robot, one_clay_robot
+    yield blueprint.ore_robot, one_ore_robot
+
+def simulate(blueprint, state, goal, minutes):
+    global max_geodes
     if minutes == 0:
-        yield state
+        if state.resources.geode >= max_geodes:
+            max_geodes = state.resources.geode
+            # yield state
+            yield state.resources.geode
     else:
-        for c in choices(blueprint, state):
-            c.resources += c.robots
-            yield from simulate(blueprint, c, minutes - 1)
+        if max_geode_from(state.resources.geode, state.robots.geode, minutes) < max_geodes:
+            return
+        if goal == None:
+            for g in goals(blueprint, state):
+                yield from simulate(blueprint, state, g, minutes)
+        else:
+            cost, produce = goal
+            resources = state.resources
+            robots = state.robots
+            if resources.can_spend(cost):
+                # each robot produces one resource
+                resources += robots
+                robots += produce
+                resources -= cost
+                goal = None
+            else:
+                # each robot produces one resource
+                resources += robots
+
+            yield from simulate(blueprint, State(resources, robots), goal, minutes - 1)
 
 def solve(blueprint, initial_state, minutes):
-    return max(simulate(blueprint, initial_state, minutes), key=lambda state: state.resources.geode)
+    return max(simulate(blueprint, initial_state, None, minutes), default = 0)
+
+def solve_blueprints(blueprints, minutes):
+    global max_geodes
+    for blueprint in blueprints:
+        initial_state = State(
+            resources = ResourceSpec(),
+            robots = ResourceSpec(ore = 1)
+        )
+        max_geodes = 0
+        score = solve(blueprint, initial_state, minutes)
+        yield blueprint.id, score
+        # cool down CPU
+        sleep(2)
+        
+    
 
 blueprints = map(parse_blueprint, sys.stdin)
 
-minutes = 19
+minutes = 24
 
-for blueprint in blueprints:
-    initial_state = State(
-        resources = ResourceSpec(),
-        robots = ResourceSpec(ore = 1),
-        #moves = ""
-    )
-    
-    score = solve(blueprint, initial_state, minutes)
-    print(f"{blueprint.id}, {score}")
+total = 0
+
+for id, score in solve_blueprints(blueprints, minutes):
+    print(f"{id}, {score}")
+    total += id * score
+
+print(total)
     
