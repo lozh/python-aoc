@@ -13,13 +13,14 @@ def execute_instruction(instr, args, cycle, x):
         yield cycle + 1, x
         yield cycle + 2, x + int(args[0])
 
-def execute(stdin, cycle, x):
-    for line in stdin:
+def execute(lines, cycle, x):
+    for line in lines:
         instr, *args = line.split(' ')
+        # note cycle and x are rebound, so can't use yield from
         for cycle, x in execute_instruction(instr, args, cycle, x):
             yield cycle, x
 
-stdin = sys.stdin.read().splitlines()
+stdin = map(str.rstrip, sys.stdin)
 
 states = takewhile(lambda pos: pos[0] <= 220, execute(stdin, cycle, x))
 powers = filter(lambda pos : (pos[0] - 20) % 40 == 0, states)

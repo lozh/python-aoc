@@ -20,14 +20,14 @@ def execute_instruction(instr, args, cycle, x):
         yield cycle + 1, x
         yield cycle + 2, x + int(args[0])
 
-def execute(stdin, cycle, x):
+def execute(lines, cycle, x):
     yield cycle, x
-    for line in stdin:
+    for line in lines:
         instr, *args = line.split(' ')
         for cycle, x in execute_instruction(instr, args, cycle, x):
             yield cycle, x
 
-stdin = sys.stdin.read().splitlines()
+stdin = map(str.rstrip, sys.stdin)
 
 states = takewhile(lambda pos: pos[0] <= 240, execute(stdin, cycle, x))
 pixels = map(lambda pos: pixel(pos[0], pos[1]), states)
