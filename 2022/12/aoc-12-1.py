@@ -12,10 +12,10 @@ def lists_to_dict(height_map):
 # possible neighbours of pos
 def neighbours(pos, rows, cols):
     x, y = pos
-    if x > 0: yield (x - 1, y)
-    if x < rows - 1: yield (x + 1, y)
-    if y > 0: yield (x, y - 1)
-    if y < cols - 1: yield (x, y + 1)
+    if x > 0: yield x - 1, y
+    if x < rows - 1: yield x + 1, y
+    if y > 0: yield x, y - 1
+    if y < cols - 1: yield x, y + 1
 
 # neighbours of pos that we are allowed to travel to
 def permissible_neighbours(height_map, pos, rows, cols):
@@ -27,7 +27,7 @@ def permissible_neighbours(height_map, pos, rows, cols):
             yield npos
 
 def find_char(char, height_map):
-    pos = [pos for (pos, value) in height_map.items() if value == char]
+    pos = [pos for pos, value in height_map.items() if value == char]
     return pos[0]
 
 # count minimum steps to get from start to end
