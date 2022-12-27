@@ -135,10 +135,6 @@ def solve_blueprints(blueprints, minutes):
         max_geodes = 0
         score = solve(blueprint, initial_state, minutes)
         yield blueprint.id, score
-        # cool down CPU
-        sleep(2)
-        
-    
 
 blueprints = map(parse_blueprint, sys.stdin)
 
