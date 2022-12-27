@@ -1,7 +1,7 @@
 #!/usr/bin/env /usr/bin/python3
 
 import sys
-import math
+from math import copysign
 
 def parse_line(line):
     x, y = line.split(" ")
@@ -13,13 +13,12 @@ def parse_lines(stdin):
 def move_knot(h, t):
     hx, hy = h
     tx, ty = t
-    dx = hx - tx
-    dy = hy - ty
+    dx, dy = hx - tx, hy - ty
     if abs(dx) > 1 or abs(dy) > 1:
         if abs(dx) > 0:
-            tx = tx + int(math.copysign(1, dx))
+            tx += int(copysign(1, dx))
         if abs(dy) > 0:
-            ty = ty + int(math.copysign(1, dy))
+            ty += int(copysign(1, dy))
     return tx, ty
 
 def apply_move(game, move, vecs, tails):
@@ -34,7 +33,7 @@ def apply_move(game, move, vecs, tails):
 
         tail = game[knot_count - 1]
         if not tail in tails:
-            tails[tail] = True
+            tails.add(tail)
     return (game, tails)
 
 knot_count = 10
@@ -43,17 +42,12 @@ knot_count = 10
 # game is dict of knot# -> (knot_x, knot_y)
 game = dict(map(lambda x: (x, (0, 0)), range(knot_count)))
 
-vecs = { 'U': (0, 1), 'D': (0, -1), 'R': (1, 0), 'L': (-1, 0) }
+vecs = {'U': (0, 1), 'D': (0, -1), 'R': (1, 0), 'L': (-1, 0)}
 
 # unique positins tail has visited
-tails = {(0,0): True}
+tails = {(0,0)}
 
-stdin = sys.stdin.read().splitlines()
-
-for move in parse_lines(stdin):
-    # print(f"move: {move}")
+for move in parse_lines(map(str.rstrip, sys.stdin)):
     game, tails = apply_move(game, move, vecs, tails)
-    # print(f"game: {game}")
-    # print(f"tails: {tails}")
 
 print(len(tails))
