@@ -72,7 +72,7 @@ while True:
 
 lcm = reduce(lcm, (m.div for m in monkeys))
 
-for i in range(10000):
+for _ in range(10000):
     monkeys = process_round(monkeys, lcm)
 
 inspect_counts = (m.inspect_count for m in monkeys)
