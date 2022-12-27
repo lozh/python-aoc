@@ -10,7 +10,7 @@ def snafu_to_d(s):
     ret = 0
     while True:
         *s, c = s
-        ret = ret + pow(base, p) * s_val[c]
+        ret += pow(base, p) * s_val[c]
         p += 1
         if not s:
             return ret
@@ -19,7 +19,6 @@ d_val = {0: (0, '0'), 1: (1, '1'), 2: (2, '2'), 3: (-2, '='), 4: (-1, '-')}
 
 def d_to_snafu(d):
     base = 5
-    p = 1
     ret = []
     while True:
         pent = d % base
