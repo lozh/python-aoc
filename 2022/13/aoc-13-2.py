@@ -2,11 +2,8 @@
 
 # Warning, this uses eval on stdin
 import sys
-import itertools
 from itertools import zip_longest
-import functools
 from functools import cmp_to_key, reduce
-import operator
 from operator import mul
 
 dividers = [[[2]], [[6]]]

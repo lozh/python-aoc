@@ -2,7 +2,6 @@
 
 # Warning, this uses eval on stdin
 import sys
-import itertools
 from itertools import zip_longest
 
 def parse_packets(lines):
@@ -42,6 +41,6 @@ def cmp_packets(p1, p2):
 
 def packets_in_order(p1, p2):
     return cmp_packets(p1, p2) >= 0
-    
+
 packets = (x + 1 for x, (p1, p2) in enumerate(parse_packets(sys.stdin)) if packets_in_order(p1, p2))
 print(sum(packets))
