@@ -15,17 +15,12 @@ def ranges(x, y, maxx, maxy):
     yield map(lambda z: (x, z), reversed(range(0, y)))
     yield map(lambda z: (x, z), range(y + 1, maxy))
 
-debug = {}
 # trees
 def is_visible(trees, x, y):
     for r in ranges(x, y, len(trees[0]), len(trees)):
         visible = True
         for (x2, y2) in r:
-            if (x, y) in debug:
-                print(f"(({x1}, {y1}), ({x2}, {y2})): ({trees[x1][y1]}, {trees[x2][y2]})")
             if trees[x][y] <= trees[x2][y2]:
-                if (x, y) in debug:
-                    print("False")
                 visible = False
                 break
         if visible:
@@ -34,11 +29,7 @@ def is_visible(trees, x, y):
 
 def score(trees, x, y, r):
     score = 0
-    if (x, y) in debug:
-        print(f"{x}, {y}, {trees[x][y]}")
     for (x2, y2) in r:
-        if (x, y) in debug:
-            print(f"{x}, {y}, {x2}, {y2}, {trees[x][y]}, {trees[x2][y2]}")
         score = score + 1
         if trees[x2][y2] >= trees[x][y]:
             break
@@ -48,8 +39,6 @@ def scenic_score(trees, x, y):
     rs = ranges(x, y, len(trees[0]), len(trees))
     range_scores = map(lambda r: score(trees, x, y, r), rs)
     s = functools.reduce(lambda x, y: x * y, range_scores, 1)
-    if (x, y) in debug:
-        print(f"{x}, {y} = {s}")
     return s
 
 def scenic_scores(trees):
