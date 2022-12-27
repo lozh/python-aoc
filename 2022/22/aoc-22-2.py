@@ -139,11 +139,10 @@ def simulate(layout, instructions, edges):
         if is_move:
             x, y, dir = move(layout, pos, dir, i, bounds, edges)
             pos = x, y
-            is_move = False
         else:
             dir = dir_rotates[(dir, i)]
-            is_move = True
 
+        is_move = not is_move
     return pos, dir
 
 
