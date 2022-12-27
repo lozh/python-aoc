@@ -2,10 +2,8 @@
 
 import sys
 import re
-import operator
 from operator import add
-import itertools
-from itertools import takewhile, tee
+from itertools import takewhile, tee, count
 
 def tuple_add(x, y):
     return tuple_map(add, x, y)
@@ -74,18 +72,16 @@ def sand(start, grid, bottom):
 
 # Run the simulation
 def simulate(entry, grid, bottom):
-    i = 0
-    while True:
+    for i in count():
         s = sand(entry, grid, bottom)
-        if s == None:
+        if not s:
             # sand escaped
             return i
-        grid[s] = "."
-        i += 1
+        grid.add(s)
 
 # where sand enters from
 entry = (500, 0)
-grid = {x:"#" for x in parse_rocks(map(str.rstrip, sys.stdin))}
+grid = {x for x in parse_rocks(map(str.rstrip, sys.stdin))}
 
 # Any sand that get to the level of the lowest rock is gone:
 bottom = max(y for (x, y) in grid)
