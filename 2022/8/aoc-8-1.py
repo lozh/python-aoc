@@ -9,9 +9,9 @@ def parse_input(stdin):
 
 
 def ranges(x, y, maxx, maxy):
-    yield map(lambda z: ((x, y), (z, y)), range(0, x))
+    yield map(lambda z: ((x, y), (z, y)), range(x))
     yield map(lambda z: ((x, y), (z, y)), range(x + 1, maxx))
-    yield map(lambda z: ((x, y), (x, z)), range(0, y))
+    yield map(lambda z: ((x, y), (x, z)), range(y))
     yield map(lambda z: ((x, y), (x, z)), range(y + 1, maxy))
 
 # trees
@@ -26,16 +26,14 @@ def is_visible(trees, x, y):
             return True
     return False
     
-stdin = sys.stdin.read().splitlines()
-
-trees = list(parse_input(stdin))
+trees = list(parse_input(map(str.rstrip, sys.stdin)))
 
 visible_count = 0
 
-for x in range(0, len(trees[0])):
-    for y in range(0, len(trees)):
+for x in range(len(trees[0])):
+    for y in range(len(trees)):
         if is_visible(trees, x, y):
-            visible_count = visible_count + 1
+            visible_count += 1
 
 print(visible_count)
                
