@@ -77,15 +77,11 @@ def solve(start, end, width, height, blizzards):
     heap = []
     Pos.target_x = end[0]
     Pos.target_y = end[1]
-    max_t = 0
     heappush(heap, Pos(x = start[0], y = start[1], t = 0))
     while True:
         pos = heappop(heap)
         if pos not in visited:
             visited.add(pos)
-            if pos.t > max_t:
-                max_t = pos.t
-                print(max_t)
             if (pos.x, pos.y) == end:
                 return pos.t
             for x, y in moves(start, end, width, height, pos.x, pos.y):
