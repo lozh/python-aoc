@@ -38,6 +38,10 @@ class Blueprint:
     clay_robot: ResourceSpec
     obsidian_robot: ResourceSpec
     geode_robot: ResourceSpec
+    # At some point, you get so many of one robot type
+    # That you could produce one of anything indefinitely without
+    # needing any more of that resource
+    max_useful_robots: ResourceSpec
 
 @dataclass
 class State:
@@ -48,12 +52,22 @@ blueprint_re = re.compile("^Blueprint (\d+): Each ore robot costs (\d+) ore\. Ea
 
 def parse_blueprint(line):
     m = blueprint_re.match(line)
+    id = int(m.group(1))
+    ore_robot = ResourceSpec(ore = int(m.group(2)))
+    clay_robot = ResourceSpec(ore = int(m.group(3)))
+    obsidian_robot = ResourceSpec(ore = int(m.group(4)), clay = int(m.group(5)))
+    geode_robot = ResourceSpec(ore = int(m.group(6)), obsidian = int(m.group(7)))
+    max_useful_ore_robots = max(ore_robot.ore, clay_robot.ore, obsidian_robot.ore, geode_robot.ore)
+    max_useful_clay_robots = max(ore_robot.clay, clay_robot.clay, obsidian_robot.clay, geode_robot.clay)
+    max_useful_obsidian_robots = max(ore_robot.obsidian, clay_robot.obsidian, obsidian_robot.obsidian, geode_robot.obsidian)
     return Blueprint(
-        id = int(m.group(1)),
-        ore_robot = ResourceSpec(ore = int(m.group(2))),
-        clay_robot = ResourceSpec(ore = int(m.group(3))),
-        obsidian_robot = ResourceSpec(ore = int(m.group(4)), clay = int(m.group(5))),
-        geode_robot = ResourceSpec(ore = int(m.group(6)), obsidian = int(m.group(7)))
+        id = id,
+        ore_robot = ore_robot,
+        clay_robot = clay_robot,
+        obsidian_robot = obsidian_robot,
+        geode_robot = geode_robot,
+        # -1 to indicate no useful maximum
+        max_useful_robots = ResourceSpec(max_useful_ore_robots, max_useful_clay_robots, max_useful_obsidian_robots, -1)
     )
 
 one_geode_robot = ResourceSpec(geode = 1)
@@ -72,10 +86,12 @@ def goals(blueprint, state):
     # what could we aim to build next
     if state.robots.obsidian > 0:
         yield blueprint.geode_robot, one_geode_robot
-    if state.robots.clay > 0:
+    if state.robots.clay > 0 and state.robots.obsidian < blueprint.max_useful_robots.obsidian:
         yield blueprint.obsidian_robot, one_obsidian_robot
-    yield blueprint.clay_robot, one_clay_robot
-    yield blueprint.ore_robot, one_ore_robot
+    if state.robots.clay < blueprint.max_useful_robots.clay:
+        yield blueprint.clay_robot, one_clay_robot
+    if state.robots.ore < blueprint.max_useful_robots.ore:
+        yield blueprint.ore_robot, one_ore_robot
 
 def simulate(blueprint, state, goal, minutes):
     global max_geodes
