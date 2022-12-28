@@ -43,8 +43,8 @@ def path(valves, src, dest):
                         if not visited[visited[route]]:
                             return route
                         route = visited[route]
-    # implicitly return None - no path exists
-
+    # We're assuming the graph is connected
+    raise
 
 # return hash of (src,dest), next)
 # I.e to get from src to dest go to next
@@ -53,7 +53,6 @@ def build_paths(valves):
         for dest in valves:
             if src != dest:
                 yield ((src, dest), path(valves, src, dest))
-
 
 # our strategy is to pick a next valve to open
 # if we're there then open it an then pick another
@@ -69,15 +68,8 @@ def solve(valves, paths, unused, pos, minutes, score, target):
 
     # We don't have a target, try all unused nodes
     if not target:
-        # if we have a disjoint graph, we might not be able to make any more progress
-        stuck = True
         for target in unused:
-            if paths[(pos, target)]:
-                for s in solve(valves, paths, unused, pos, minutes, score, target):
-                    yield s
-                    stuck = False
-        if stuck:
-            yield score
+            yield from solve(valves, paths, unused, pos, minutes, score, target)
     elif pos == target:
         # We're at our target, turn the valve
         flow = valves[pos].flow
@@ -86,14 +78,7 @@ def solve(valves, paths, unused, pos, minutes, score, target):
         unused.add(target)
     else:
         # We're not at our target
-        # We can try and short circuit here, but it doesn't make a
-        # practical difference on the input
-        # if valves[pos] in unused and valves[pos].flow >= valves[target].flow:
-            # current node is better than where we're trying to go. can't be correct
-        #    return
-        # else:
         yield from solve(valves, paths, unused, paths[(pos, target)], minutes - 1, score, target)
-
 
 valves = {x.valve:x for x in map(parse_line, sys.stdin)}
 paths = {k:v for k, v in build_paths(valves)}
