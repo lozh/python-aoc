@@ -88,7 +88,7 @@ def solve(start, end, width, height, blizzards, start_t):
                 return pos.t
             for x, y in moves(start, end, width, height, pos.x, pos.y):
                 if not blizzard_at_pos_at_t(blizzards, x, y, pos.t + 1, width, height):
-                        heappush(heap, Pos(x = x, y = y, t = pos.t + 1))
+                    heappush(heap, Pos(x = x, y = y, t = pos.t + 1))
 
 start, end, width, height, blizzards = parse_input(map(str.rstrip, sys.stdin))
 
