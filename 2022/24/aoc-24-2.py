@@ -17,6 +17,8 @@ class Pos:
     def __lt__(self, other):
         return self.__cmp__(other) < 0
 
+    # Finding the shortest path depends on this ordering
+    # Always ordering shorter paths before longer ones
     def __cmp__(self, other):
         a = self.__key__()
         b = other.__key__()
