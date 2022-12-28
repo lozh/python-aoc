@@ -3,7 +3,7 @@
 import sys
 
 def encode(s):
-    ret = ""
+    ret = []
     i = 0
     while i < len(s):
         c = s[i]
@@ -15,8 +15,9 @@ def encode(s):
                 break
         n = j - i
         i += n
-        ret = ret + str(n) + c
-    return ret
+        ret.append(str(n))
+        ret.append(c)
+    return "".join(ret)
 
 line = sys.stdin.readline().rstrip()
 
