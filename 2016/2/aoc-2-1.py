@@ -23,7 +23,7 @@ def bound(x):
     if x > 2:
         return 2
     return x
-        
+
 ans = ""
 
 for instructions in map(str.rstrip, sys.stdin):

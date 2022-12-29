@@ -25,7 +25,7 @@ def bound(x):
     if x > 4:
         return 4
     return x
-        
+
 ans = ""
 
 for instructions in map(str.rstrip, sys.stdin):
