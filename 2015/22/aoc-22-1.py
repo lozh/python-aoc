@@ -14,7 +14,7 @@ class Actor:
 class State:
     me: Actor
     boss: Actor
-    effects: dict
+    effects: list
     mana_spent: int
     actions: list
 
