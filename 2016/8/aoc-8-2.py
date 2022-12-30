@@ -51,5 +51,5 @@ for _ in range(rows):
 
 for i in sys.stdin:
     screen = apply(screen, i)
-    
+
 print_screen(screen)
