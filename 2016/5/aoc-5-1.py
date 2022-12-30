@@ -12,7 +12,7 @@ def password(start, zerocount):
     for i in count():
         h = md5(f"{start}{i}".encode()).digest()
         if is_key(h, mask):
-            yield h.hex()[zerocount]                
+            yield h.hex()[zerocount]
 
 pass_len = 8
 zero_count = 5
