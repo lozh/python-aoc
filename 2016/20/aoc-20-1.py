@@ -23,7 +23,7 @@ def consolidate_ranges(ranges):
                 cur = cur[0], max(cur[1], r[1])
             else:
                 yield cur
-                cur = None
+                cur = r
     if cur != None:
         yield cur
 
