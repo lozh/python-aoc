@@ -15,5 +15,5 @@ def tuple_add(*t):
 
 instructions = sys.stdin.readline().rstrip()
 path = (offsets[i] for i in instructions)
-print(len(set(accumulate(path, tuple_add))))
+print(len(set(accumulate(path, tuple_add, initial = (0,0)))))
 
