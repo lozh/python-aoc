@@ -1,7 +1,7 @@
 #!/usr/bin/env /usr/bin/python3
 
 import sys
-from itertools import accumulate, chain
+from itertools import accumulate
 
 offsets = {
     '^': (0, 1),
