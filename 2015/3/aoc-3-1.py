@@ -1,19 +1,25 @@
 #!/usr/bin/env /usr/bin/python3
 
-import sys
 from itertools import accumulate
 
-offsets = {
-    '^': (0, 1),
-    'v': (0, -1),
-    '>': (1, 0),
-    '<': (-1, 0),
-}
 
 def tuple_add(*t):
     return tuple(map(sum, zip(*t)))
 
-instructions = sys.stdin.readline().rstrip()
-path = (offsets[i] for i in instructions)
-print(len(set(accumulate(path, tuple_add, initial = (0,0)))))
+def travel(path, start):
+    yield from accumulate(path, tuple_add, initial = start)
+
+if __name__ == "__main__":
+    import sys
+
+    offsets = {
+        '^': (0, 1),
+        'v': (0, -1),
+        '>': (1, 0),
+        '<': (-1, 0),
+    }
+
+    instructions = sys.stdin.readline().rstrip()
+    path = (offsets[i] for i in instructions)
+    print(len(set(travel(path, (0,0)))))
 
