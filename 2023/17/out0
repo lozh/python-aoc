@@ -1,0 +1,498 @@
+Move(pos=Pos(x=2, y=4), direction=<Direction.NONE: 1>, consecutive=0)
+XXX
+Move(pos=Pos(x=3, y=4), direction=<Direction.EAST: 3>, consecutive=0)
+Move(pos=Pos(x=2, y=3), direction=<Direction.NORTH: 2>, consecutive=0)
+XXX
+Move(pos=Pos(x=3, y=3), direction=<Direction.EAST: 3>, consecutive=0)
+XXX
+Move(pos=Pos(x=3, y=4), direction=<Direction.SOUTH: 4>, consecutive=0)
+Move(pos=Pos(x=3, y=2), direction=<Direction.NORTH: 2>, consecutive=0)
+XXX
+Move(pos=Pos(x=3, y=1), direction=<Direction.NORTH: 2>, consecutive=1)
+XXX
+Move(pos=Pos(x=3, y=0), direction=<Direction.NORTH: 2>, consecutive=2)
+XXX
+Move(pos=Pos(x=2, y=0), direction=<Direction.WEST: 5>, consecutive=0)
+XXX
+Move(pos=Pos(x=2, y=1), direction=<Direction.SOUTH: 4>, consecutive=0)
+XXX
+Move(pos=Pos(x=2, y=2), direction=<Direction.SOUTH: 4>, consecutive=1)
+XXX
+Move(pos=Pos(x=2, y=3), direction=<Direction.SOUTH: 4>, consecutive=2)
+XXX
+Move(pos=Pos(x=3, y=3), direction=<Direction.EAST: 3>, consecutive=0)
+XXX
+Move(pos=Pos(x=3, y=2), direction=<Direction.NORTH: 2>, consecutive=0)
+XXX
+Move(pos=Pos(x=3, y=1), direction=<Direction.NORTH: 2>, consecutive=1)
+XXX
+Move(pos=Pos(x=3, y=0), direction=<Direction.NORTH: 2>, consecutive=2)
+XXX
+Move(pos=Pos(x=2, y=0), direction=<Direction.WEST: 5>, consecutive=0)
+XXX
+Move(pos=Pos(x=2, y=1), direction=<Direction.SOUTH: 4>, consecutive=0)
+XXX
+Move(pos=Pos(x=2, y=2), direction=<Direction.SOUTH: 4>, consecutive=1)
+XXX
+Move(pos=Pos(x=2, y=3), direction=<Direction.SOUTH: 4>, consecutive=2)
+XXX
+Move(pos=Pos(x=3, y=3), direction=<Direction.EAST: 3>, consecutive=0)
+XXX
+Move(pos=Pos(x=3, y=2), direction=<Direction.NORTH: 2>, consecutive=0)
+XXX
+Move(pos=Pos(x=3, y=1), direction=<Direction.NORTH: 2>, consecutive=1)
+XXX
+Move(pos=Pos(x=3, y=0), direction=<Direction.NORTH: 2>, consecutive=2)
+XXX
+Move(pos=Pos(x=2, y=0), direction=<Direction.WEST: 5>, consecutive=0)
+XXX
+Move(pos=Pos(x=2, y=1), direction=<Direction.SOUTH: 4>, consecutive=0)
+XXX
+Move(pos=Pos(x=2, y=2), direction=<Direction.SOUTH: 4>, consecutive=1)
+XXX
+Move(pos=Pos(x=2, y=3), direction=<Direction.SOUTH: 4>, consecutive=2)
+XXX
+Move(pos=Pos(x=3, y=3), direction=<Direction.EAST: 3>, consecutive=0)
+XXX
+Move(pos=Pos(x=3, y=2), direction=<Direction.NORTH: 2>, consecutive=0)
+XXX
+Move(pos=Pos(x=3, y=1), direction=<Direction.NORTH: 2>, consecutive=1)
+XXX
+Move(pos=Pos(x=3, y=0), direction=<Direction.NORTH: 2>, consecutive=2)
+XXX
+Move(pos=Pos(x=2, y=0), direction=<Direction.WEST: 5>, consecutive=0)
+XXX
+Move(pos=Pos(x=2, y=1), direction=<Direction.SOUTH: 4>, consecutive=0)
+XXX
+Move(pos=Pos(x=2, y=2), direction=<Direction.SOUTH: 4>, consecutive=1)
+XXX
+Move(pos=Pos(x=2, y=3), direction=<Direction.SOUTH: 4>, consecutive=2)
+XXX
+Move(pos=Pos(x=3, y=3), direction=<Direction.EAST: 3>, consecutive=0)
+XXX
+Move(pos=Pos(x=3, y=2), direction=<Direction.NORTH: 2>, consecutive=0)
+XXX
+Move(pos=Pos(x=3, y=1), direction=<Direction.NORTH: 2>, consecutive=1)
+XXX
+Move(pos=Pos(x=3, y=0), direction=<Direction.NORTH: 2>, consecutive=2)
+XXX
+Move(pos=Pos(x=2, y=0), direction=<Direction.WEST: 5>, consecutive=0)
+XXX
+Move(pos=Pos(x=2, y=1), direction=<Direction.SOUTH: 4>, consecutive=0)
+XXX
+Move(pos=Pos(x=2, y=2), direction=<Direction.SOUTH: 4>, consecutive=1)
+XXX
+Move(pos=Pos(x=2, y=3), direction=<Direction.SOUTH: 4>, consecutive=2)
+XXX
+Move(pos=Pos(x=3, y=3), direction=<Direction.EAST: 3>, consecutive=0)
+XXX
+Move(pos=Pos(x=3, y=2), direction=<Direction.NORTH: 2>, consecutive=0)
+XXX
+Move(pos=Pos(x=3, y=1), direction=<Direction.NORTH: 2>, consecutive=1)
+XXX
+Move(pos=Pos(x=3, y=0), direction=<Direction.NORTH: 2>, consecutive=2)
+XXX
+Move(pos=Pos(x=2, y=0), direction=<Direction.WEST: 5>, consecutive=0)
+XXX
+Move(pos=Pos(x=2, y=1), direction=<Direction.SOUTH: 4>, consecutive=0)
+XXX
+Move(pos=Pos(x=2, y=2), direction=<Direction.SOUTH: 4>, consecutive=1)
+XXX
+Move(pos=Pos(x=2, y=3), direction=<Direction.SOUTH: 4>, consecutive=2)
+XXX
+Move(pos=Pos(x=3, y=3), direction=<Direction.EAST: 3>, consecutive=0)
+XXX
+Move(pos=Pos(x=3, y=2), direction=<Direction.NORTH: 2>, consecutive=0)
+XXX
+Move(pos=Pos(x=3, y=1), direction=<Direction.NORTH: 2>, consecutive=1)
+XXX
+Move(pos=Pos(x=3, y=0), direction=<Direction.NORTH: 2>, consecutive=2)
+XXX
+Move(pos=Pos(x=2, y=0), direction=<Direction.WEST: 5>, consecutive=0)
+XXX
+Move(pos=Pos(x=2, y=1), direction=<Direction.SOUTH: 4>, consecutive=0)
+XXX
+Move(pos=Pos(x=2, y=2), direction=<Direction.SOUTH: 4>, consecutive=1)
+XXX
+Move(pos=Pos(x=2, y=3), direction=<Direction.SOUTH: 4>, consecutive=2)
+XXX
+Move(pos=Pos(x=3, y=3), direction=<Direction.EAST: 3>, consecutive=0)
+XXX
+Move(pos=Pos(x=3, y=2), direction=<Direction.NORTH: 2>, consecutive=0)
+XXX
+Move(pos=Pos(x=3, y=1), direction=<Direction.NORTH: 2>, consecutive=1)
+XXX
+Move(pos=Pos(x=3, y=0), direction=<Direction.NORTH: 2>, consecutive=2)
+XXX
+Move(pos=Pos(x=2, y=0), direction=<Direction.WEST: 5>, consecutive=0)
+XXX
+Move(pos=Pos(x=2, y=1), direction=<Direction.SOUTH: 4>, consecutive=0)
+XXX
+Move(pos=Pos(x=2, y=2), direction=<Direction.SOUTH: 4>, consecutive=1)
+XXX
+Move(pos=Pos(x=2, y=3), direction=<Direction.SOUTH: 4>, consecutive=2)
+XXX
+Move(pos=Pos(x=3, y=3), direction=<Direction.EAST: 3>, consecutive=0)
+XXX
+Move(pos=Pos(x=3, y=2), direction=<Direction.NORTH: 2>, consecutive=0)
+XXX
+Move(pos=Pos(x=3, y=1), direction=<Direction.NORTH: 2>, consecutive=1)
+XXX
+Move(pos=Pos(x=3, y=0), direction=<Direction.NORTH: 2>, consecutive=2)
+XXX
+Move(pos=Pos(x=2, y=0), direction=<Direction.WEST: 5>, consecutive=0)
+XXX
+Move(pos=Pos(x=2, y=1), direction=<Direction.SOUTH: 4>, consecutive=0)
+XXX
+Move(pos=Pos(x=2, y=2), direction=<Direction.SOUTH: 4>, consecutive=1)
+XXX
+Move(pos=Pos(x=2, y=3), direction=<Direction.SOUTH: 4>, consecutive=2)
+XXX
+Move(pos=Pos(x=3, y=3), direction=<Direction.EAST: 3>, consecutive=0)
+XXX
+Move(pos=Pos(x=3, y=2), direction=<Direction.NORTH: 2>, consecutive=0)
+XXX
+Move(pos=Pos(x=3, y=1), direction=<Direction.NORTH: 2>, consecutive=1)
+XXX
+Move(pos=Pos(x=3, y=0), direction=<Direction.NORTH: 2>, consecutive=2)
+XXX
+Move(pos=Pos(x=2, y=0), direction=<Direction.WEST: 5>, consecutive=0)
+XXX
+Move(pos=Pos(x=2, y=1), direction=<Direction.SOUTH: 4>, consecutive=0)
+XXX
+Move(pos=Pos(x=2, y=2), direction=<Direction.SOUTH: 4>, consecutive=1)
+XXX
+Move(pos=Pos(x=2, y=3), direction=<Direction.SOUTH: 4>, consecutive=2)
+XXX
+Move(pos=Pos(x=3, y=3), direction=<Direction.EAST: 3>, consecutive=0)
+XXX
+Move(pos=Pos(x=3, y=2), direction=<Direction.NORTH: 2>, consecutive=0)
+XXX
+Move(pos=Pos(x=3, y=1), direction=<Direction.NORTH: 2>, consecutive=1)
+XXX
+Move(pos=Pos(x=3, y=0), direction=<Direction.NORTH: 2>, consecutive=2)
+XXX
+Move(pos=Pos(x=2, y=0), direction=<Direction.WEST: 5>, consecutive=0)
+XXX
+Move(pos=Pos(x=2, y=1), direction=<Direction.SOUTH: 4>, consecutive=0)
+XXX
+Move(pos=Pos(x=2, y=2), direction=<Direction.SOUTH: 4>, consecutive=1)
+XXX
+Move(pos=Pos(x=2, y=3), direction=<Direction.SOUTH: 4>, consecutive=2)
+XXX
+Move(pos=Pos(x=3, y=3), direction=<Direction.EAST: 3>, consecutive=0)
+XXX
+Move(pos=Pos(x=3, y=2), direction=<Direction.NORTH: 2>, consecutive=0)
+XXX
+Move(pos=Pos(x=3, y=1), direction=<Direction.NORTH: 2>, consecutive=1)
+XXX
+Move(pos=Pos(x=3, y=0), direction=<Direction.NORTH: 2>, consecutive=2)
+XXX
+Move(pos=Pos(x=2, y=0), direction=<Direction.WEST: 5>, consecutive=0)
+XXX
+Move(pos=Pos(x=2, y=1), direction=<Direction.SOUTH: 4>, consecutive=0)
+XXX
+Move(pos=Pos(x=2, y=2), direction=<Direction.SOUTH: 4>, consecutive=1)
+XXX
+Move(pos=Pos(x=2, y=3), direction=<Direction.SOUTH: 4>, consecutive=2)
+XXX
+Move(pos=Pos(x=3, y=3), direction=<Direction.EAST: 3>, consecutive=0)
+XXX
+Move(pos=Pos(x=3, y=2), direction=<Direction.NORTH: 2>, consecutive=0)
+XXX
+Move(pos=Pos(x=3, y=1), direction=<Direction.NORTH: 2>, consecutive=1)
+XXX
+Move(pos=Pos(x=3, y=0), direction=<Direction.NORTH: 2>, consecutive=2)
+XXX
+Move(pos=Pos(x=2, y=0), direction=<Direction.WEST: 5>, consecutive=0)
+XXX
+Move(pos=Pos(x=2, y=1), direction=<Direction.SOUTH: 4>, consecutive=0)
+XXX
+Move(pos=Pos(x=2, y=2), direction=<Direction.SOUTH: 4>, consecutive=1)
+XXX
+Move(pos=Pos(x=2, y=3), direction=<Direction.SOUTH: 4>, consecutive=2)
+XXX
+Move(pos=Pos(x=3, y=3), direction=<Direction.EAST: 3>, consecutive=0)
+XXX
+Move(pos=Pos(x=3, y=2), direction=<Direction.NORTH: 2>, consecutive=0)
+XXX
+Move(pos=Pos(x=3, y=1), direction=<Direction.NORTH: 2>, consecutive=1)
+XXX
+Move(pos=Pos(x=3, y=0), direction=<Direction.NORTH: 2>, consecutive=2)
+XXX
+Move(pos=Pos(x=2, y=0), direction=<Direction.WEST: 5>, consecutive=0)
+XXX
+Move(pos=Pos(x=2, y=1), direction=<Direction.SOUTH: 4>, consecutive=0)
+XXX
+Move(pos=Pos(x=2, y=2), direction=<Direction.SOUTH: 4>, consecutive=1)
+XXX
+Move(pos=Pos(x=2, y=3), direction=<Direction.SOUTH: 4>, consecutive=2)
+XXX
+Move(pos=Pos(x=3, y=3), direction=<Direction.EAST: 3>, consecutive=0)
+XXX
+Move(pos=Pos(x=3, y=2), direction=<Direction.NORTH: 2>, consecutive=0)
+XXX
+Move(pos=Pos(x=3, y=1), direction=<Direction.NORTH: 2>, consecutive=1)
+XXX
+Move(pos=Pos(x=3, y=0), direction=<Direction.NORTH: 2>, consecutive=2)
+XXX
+Move(pos=Pos(x=2, y=0), direction=<Direction.WEST: 5>, consecutive=0)
+XXX
+Move(pos=Pos(x=2, y=1), direction=<Direction.SOUTH: 4>, consecutive=0)
+XXX
+Move(pos=Pos(x=2, y=2), direction=<Direction.SOUTH: 4>, consecutive=1)
+XXX
+Move(pos=Pos(x=2, y=3), direction=<Direction.SOUTH: 4>, consecutive=2)
+XXX
+Move(pos=Pos(x=3, y=3), direction=<Direction.EAST: 3>, consecutive=0)
+XXX
+Move(pos=Pos(x=3, y=2), direction=<Direction.NORTH: 2>, consecutive=0)
+XXX
+Move(pos=Pos(x=3, y=1), direction=<Direction.NORTH: 2>, consecutive=1)
+XXX
+Move(pos=Pos(x=3, y=0), direction=<Direction.NORTH: 2>, consecutive=2)
+XXX
+Move(pos=Pos(x=2, y=0), direction=<Direction.WEST: 5>, consecutive=0)
+XXX
+Move(pos=Pos(x=2, y=1), direction=<Direction.SOUTH: 4>, consecutive=0)
+XXX
+Move(pos=Pos(x=2, y=2), direction=<Direction.SOUTH: 4>, consecutive=1)
+XXX
+Move(pos=Pos(x=2, y=3), direction=<Direction.SOUTH: 4>, consecutive=2)
+XXX
+Move(pos=Pos(x=3, y=3), direction=<Direction.EAST: 3>, consecutive=0)
+XXX
+Move(pos=Pos(x=3, y=2), direction=<Direction.NORTH: 2>, consecutive=0)
+XXX
+Move(pos=Pos(x=3, y=1), direction=<Direction.NORTH: 2>, consecutive=1)
+XXX
+Move(pos=Pos(x=3, y=0), direction=<Direction.NORTH: 2>, consecutive=2)
+XXX
+Move(pos=Pos(x=2, y=0), direction=<Direction.WEST: 5>, consecutive=0)
+XXX
+Move(pos=Pos(x=2, y=1), direction=<Direction.SOUTH: 4>, consecutive=0)
+XXX
+Move(pos=Pos(x=2, y=2), direction=<Direction.SOUTH: 4>, consecutive=1)
+XXX
+Move(pos=Pos(x=2, y=3), direction=<Direction.SOUTH: 4>, consecutive=2)
+XXX
+Move(pos=Pos(x=3, y=3), direction=<Direction.EAST: 3>, consecutive=0)
+XXX
+Move(pos=Pos(x=3, y=2), direction=<Direction.NORTH: 2>, consecutive=0)
+XXX
+Move(pos=Pos(x=3, y=1), direction=<Direction.NORTH: 2>, consecutive=1)
+XXX
+Move(pos=Pos(x=3, y=0), direction=<Direction.NORTH: 2>, consecutive=2)
+XXX
+Move(pos=Pos(x=2, y=0), direction=<Direction.WEST: 5>, consecutive=0)
+XXX
+Move(pos=Pos(x=2, y=1), direction=<Direction.SOUTH: 4>, consecutive=0)
+XXX
+Move(pos=Pos(x=2, y=2), direction=<Direction.SOUTH: 4>, consecutive=1)
+XXX
+Move(pos=Pos(x=2, y=3), direction=<Direction.SOUTH: 4>, consecutive=2)
+XXX
+Move(pos=Pos(x=3, y=3), direction=<Direction.EAST: 3>, consecutive=0)
+XXX
+Move(pos=Pos(x=3, y=2), direction=<Direction.NORTH: 2>, consecutive=0)
+XXX
+Move(pos=Pos(x=3, y=1), direction=<Direction.NORTH: 2>, consecutive=1)
+XXX
+Move(pos=Pos(x=3, y=0), direction=<Direction.NORTH: 2>, consecutive=2)
+XXX
+Move(pos=Pos(x=2, y=0), direction=<Direction.WEST: 5>, consecutive=0)
+XXX
+Move(pos=Pos(x=2, y=1), direction=<Direction.SOUTH: 4>, consecutive=0)
+XXX
+Move(pos=Pos(x=2, y=2), direction=<Direction.SOUTH: 4>, consecutive=1)
+XXX
+Move(pos=Pos(x=2, y=3), direction=<Direction.SOUTH: 4>, consecutive=2)
+XXX
+Move(pos=Pos(x=3, y=3), direction=<Direction.EAST: 3>, consecutive=0)
+XXX
+Move(pos=Pos(x=3, y=2), direction=<Direction.NORTH: 2>, consecutive=0)
+XXX
+Move(pos=Pos(x=3, y=1), direction=<Direction.NORTH: 2>, consecutive=1)
+XXX
+Move(pos=Pos(x=3, y=0), direction=<Direction.NORTH: 2>, consecutive=2)
+XXX
+Move(pos=Pos(x=2, y=0), direction=<Direction.WEST: 5>, consecutive=0)
+XXX
+Move(pos=Pos(x=2, y=1), direction=<Direction.SOUTH: 4>, consecutive=0)
+XXX
+Move(pos=Pos(x=2, y=2), direction=<Direction.SOUTH: 4>, consecutive=1)
+XXX
+Move(pos=Pos(x=2, y=3), direction=<Direction.SOUTH: 4>, consecutive=2)
+XXX
+Move(pos=Pos(x=3, y=3), direction=<Direction.EAST: 3>, consecutive=0)
+XXX
+Move(pos=Pos(x=3, y=2), direction=<Direction.NORTH: 2>, consecutive=0)
+XXX
+Move(pos=Pos(x=3, y=1), direction=<Direction.NORTH: 2>, consecutive=1)
+XXX
+Move(pos=Pos(x=3, y=0), direction=<Direction.NORTH: 2>, consecutive=2)
+XXX
+Move(pos=Pos(x=2, y=0), direction=<Direction.WEST: 5>, consecutive=0)
+XXX
+Move(pos=Pos(x=2, y=1), direction=<Direction.SOUTH: 4>, consecutive=0)
+XXX
+Move(pos=Pos(x=2, y=2), direction=<Direction.SOUTH: 4>, consecutive=1)
+XXX
+Move(pos=Pos(x=2, y=3), direction=<Direction.SOUTH: 4>, consecutive=2)
+XXX
+Move(pos=Pos(x=3, y=3), direction=<Direction.EAST: 3>, consecutive=0)
+XXX
+Move(pos=Pos(x=3, y=2), direction=<Direction.NORTH: 2>, consecutive=0)
+XXX
+Move(pos=Pos(x=3, y=1), direction=<Direction.NORTH: 2>, consecutive=1)
+XXX
+Move(pos=Pos(x=3, y=0), direction=<Direction.NORTH: 2>, consecutive=2)
+XXX
+Move(pos=Pos(x=2, y=0), direction=<Direction.WEST: 5>, consecutive=0)
+XXX
+Move(pos=Pos(x=2, y=1), direction=<Direction.SOUTH: 4>, consecutive=0)
+XXX
+Move(pos=Pos(x=2, y=2), direction=<Direction.SOUTH: 4>, consecutive=1)
+XXX
+Move(pos=Pos(x=2, y=3), direction=<Direction.SOUTH: 4>, consecutive=2)
+XXX
+Move(pos=Pos(x=3, y=3), direction=<Direction.EAST: 3>, consecutive=0)
+XXX
+Move(pos=Pos(x=3, y=2), direction=<Direction.NORTH: 2>, consecutive=0)
+XXX
+Move(pos=Pos(x=3, y=1), direction=<Direction.NORTH: 2>, consecutive=1)
+XXX
+Move(pos=Pos(x=3, y=0), direction=<Direction.NORTH: 2>, consecutive=2)
+XXX
+Move(pos=Pos(x=2, y=0), direction=<Direction.WEST: 5>, consecutive=0)
+XXX
+Move(pos=Pos(x=2, y=1), direction=<Direction.SOUTH: 4>, consecutive=0)
+XXX
+Move(pos=Pos(x=2, y=2), direction=<Direction.SOUTH: 4>, consecutive=1)
+XXX
+Move(pos=Pos(x=2, y=3), direction=<Direction.SOUTH: 4>, consecutive=2)
+XXX
+Move(pos=Pos(x=3, y=3), direction=<Direction.EAST: 3>, consecutive=0)
+XXX
+Move(pos=Pos(x=3, y=2), direction=<Direction.NORTH: 2>, consecutive=0)
+XXX
+Move(pos=Pos(x=3, y=1), direction=<Direction.NORTH: 2>, consecutive=1)
+XXX
+Move(pos=Pos(x=3, y=0), direction=<Direction.NORTH: 2>, consecutive=2)
+XXX
+Move(pos=Pos(x=2, y=0), direction=<Direction.WEST: 5>, consecutive=0)
+XXX
+Move(pos=Pos(x=2, y=1), direction=<Direction.SOUTH: 4>, consecutive=0)
+XXX
+Move(pos=Pos(x=2, y=2), direction=<Direction.SOUTH: 4>, consecutive=1)
+XXX
+Move(pos=Pos(x=2, y=3), direction=<Direction.SOUTH: 4>, consecutive=2)
+XXX
+Move(pos=Pos(x=3, y=3), direction=<Direction.EAST: 3>, consecutive=0)
+XXX
+Move(pos=Pos(x=3, y=2), direction=<Direction.NORTH: 2>, consecutive=0)
+XXX
+Move(pos=Pos(x=3, y=1), direction=<Direction.NORTH: 2>, consecutive=1)
+XXX
+Move(pos=Pos(x=3, y=0), direction=<Direction.NORTH: 2>, consecutive=2)
+XXX
+Move(pos=Pos(x=2, y=0), direction=<Direction.WEST: 5>, consecutive=0)
+XXX
+Move(pos=Pos(x=2, y=1), direction=<Direction.SOUTH: 4>, consecutive=0)
+XXX
+Move(pos=Pos(x=2, y=2), direction=<Direction.SOUTH: 4>, consecutive=1)
+XXX
+Move(pos=Pos(x=2, y=3), direction=<Direction.SOUTH: 4>, consecutive=2)
+XXX
+Move(pos=Pos(x=3, y=3), direction=<Direction.EAST: 3>, consecutive=0)
+XXX
+Move(pos=Pos(x=3, y=2), direction=<Direction.NORTH: 2>, consecutive=0)
+XXX
+Move(pos=Pos(x=3, y=1), direction=<Direction.NORTH: 2>, consecutive=1)
+XXX
+Move(pos=Pos(x=3, y=0), direction=<Direction.NORTH: 2>, consecutive=2)
+XXX
+Move(pos=Pos(x=2, y=0), direction=<Direction.WEST: 5>, consecutive=0)
+XXX
+Move(pos=Pos(x=2, y=1), direction=<Direction.SOUTH: 4>, consecutive=0)
+XXX
+Move(pos=Pos(x=2, y=2), direction=<Direction.SOUTH: 4>, consecutive=1)
+XXX
+Move(pos=Pos(x=2, y=3), direction=<Direction.SOUTH: 4>, consecutive=2)
+XXX
+Move(pos=Pos(x=3, y=3), direction=<Direction.EAST: 3>, consecutive=0)
+XXX
+Move(pos=Pos(x=3, y=2), direction=<Direction.NORTH: 2>, consecutive=0)
+XXX
+Move(pos=Pos(x=3, y=1), direction=<Direction.NORTH: 2>, consecutive=1)
+XXX
+Move(pos=Pos(x=3, y=0), direction=<Direction.NORTH: 2>, consecutive=2)
+XXX
+Move(pos=Pos(x=2, y=0), direction=<Direction.WEST: 5>, consecutive=0)
+XXX
+Move(pos=Pos(x=2, y=1), direction=<Direction.SOUTH: 4>, consecutive=0)
+XXX
+Move(pos=Pos(x=2, y=2), direction=<Direction.SOUTH: 4>, consecutive=1)
+XXX
+Move(pos=Pos(x=2, y=3), direction=<Direction.SOUTH: 4>, consecutive=2)
+XXX
+Move(pos=Pos(x=3, y=3), direction=<Direction.EAST: 3>, consecutive=0)
+XXX
+Move(pos=Pos(x=3, y=2), direction=<Direction.NORTH: 2>, consecutive=0)
+XXX
+Move(pos=Pos(x=3, y=1), direction=<Direction.NORTH: 2>, consecutive=1)
+XXX
+Move(pos=Pos(x=3, y=0), direction=<Direction.NORTH: 2>, consecutive=2)
+XXX
+Move(pos=Pos(x=2, y=0), direction=<Direction.WEST: 5>, consecutive=0)
+XXX
+Move(pos=Pos(x=2, y=1), direction=<Direction.SOUTH: 4>, consecutive=0)
+XXX
+Move(pos=Pos(x=2, y=2), direction=<Direction.SOUTH: 4>, consecutive=1)
+XXX
+Move(pos=Pos(x=2, y=3), direction=<Direction.SOUTH: 4>, consecutive=2)
+XXX
+Move(pos=Pos(x=3, y=3), direction=<Direction.EAST: 3>, consecutive=0)
+XXX
+Move(pos=Pos(x=3, y=2), direction=<Direction.NORTH: 2>, consecutive=0)
+XXX
+Move(pos=Pos(x=3, y=1), direction=<Direction.NORTH: 2>, consecutive=1)
+XXX
+Move(pos=Pos(x=3, y=0), direction=<Direction.NORTH: 2>, consecutive=2)
+XXX
+Move(pos=Pos(x=2, y=0), direction=<Direction.WEST: 5>, consecutive=0)
+XXX
+Move(pos=Pos(x=2, y=1), direction=<Direction.SOUTH: 4>, consecutive=0)
+XXX
+Move(pos=Pos(x=2, y=2), direction=<Direction.SOUTH: 4>, consecutive=1)
+XXX
+Move(pos=Pos(x=2, y=3), direction=<Direction.SOUTH: 4>, consecutive=2)
+XXX
+Move(pos=Pos(x=3, y=3), direction=<Direction.EAST: 3>, consecutive=0)
+XXX
+Move(pos=Pos(x=3, y=2), direction=<Direction.NORTH: 2>, consecutive=0)
+XXX
+Move(pos=Pos(x=3, y=1), direction=<Direction.NORTH: 2>, consecutive=1)
+XXX
+Move(pos=Pos(x=3, y=0), direction=<Direction.NORTH: 2>, consecutive=2)
+XXX
+Move(pos=Pos(x=2, y=0), direction=<Direction.WEST: 5>, consecutive=0)
+XXX
+Move(pos=Pos(x=2, y=1), direction=<Direction.SOUTH: 4>, consecutive=0)
+XXX
+Move(pos=Pos(x=2, y=2), direction=<Direction.SOUTH: 4>, consecutive=1)
+XXX
+Move(pos=Pos(x=2, y=3), direction=<Direction.SOUTH: 4>, consecutive=2)
+XXX
+Move(pos=Pos(x=3, y=3), direction=<Direction.EAST: 3>, consecutive=0)
+XXX
+Move(pos=Pos(x=3, y=2), direction=<Direction.NORTH: 2>, consecutive=0)
+XXX
+Move(pos=Pos(x=3, y=1), direction=<Direction.NORTH: 2>, consecutive=1)
+XXX
+Move(pos=Pos(x=3, y=0), direction=<Direction.NORTH: 2>, consecutive=2)
+XXX
+Move(pos=Pos(x=2, y=0), direction=<Direction.WEST: 5>, consecutive=0)
+XXX
+Move(pos=Pos(x=2, y=1), direction=<Direction.SOUTH: 4>, consecutive=0)
+XXX
