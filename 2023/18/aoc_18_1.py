@@ -149,7 +149,7 @@ class Dig:
                 if n and n.yintersects(cy):
                     cur.append(n)
                     continue
-            while True:
+            while cur:
                 # how many lava cells in this line?
                 subcount = self.line_count(cy, cur)
                 # find next line where the structure changes
@@ -169,9 +169,6 @@ class Dig:
                     # if we got to the next unsused trench then add it and
                     # break out to possibly add more
                     cur.append(n)
-                    break
-                if not cur:
-                    # we're done
                     break
                 
         return count
