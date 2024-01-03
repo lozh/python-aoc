@@ -49,7 +49,7 @@ class Trench:
     def is_vert(self):
         return self.direction.x == 0
     
-    def cuts(self, y):
+    def yintersects(self, y):
         if self.is_vert():
             return self.pos.y <= y and self.pos.y + self.distance > y
         else:
@@ -134,17 +134,46 @@ class Dig:
     # horizontal
     def fill_count(self):
         count = 0
-        xn = min(p.x for p in self.corners)
-        yn = min(p.y for p in self.corners)
-        xx = max(p.x for p in self.corners)
-        yx = max(p.y for p in self.corners)
-        last_intersects = None
-        for y in range(yn, yx + 1):
-            intersects = {t for t in self.trenches if t.cuts(y)}
-            if intersects != last_intersects:
-                last_intersects = intersects
-                subcount = self.line_count(y, intersects)
-            count += subcount
+        subcount = 0
+        trenches = sorted(self.trenches, key = lambda t: (t.pos.y, t.pos.x, 0 if t.is_vert() else 1), reverse = True)
+        # This contains trenches that intersect the current line of interest
+        cur = [trenches.pop()]
+        cy = cur[0].pos.y
+        # It feels like this structure can be simplified
+        while cur:
+            n = None
+            # keep adding trenches that intersect the current line of interest
+            if trenches:
+                # n is next unsued trench
+                n = trenches.pop()
+                if n and n.yintersects(cy):
+                    cur.append(n)
+                    continue
+            while True:
+                # how many lava cells in this line?
+                subcount = self.line_count(cy, cur)
+                # find next line where the structure changes
+                ny = min(t.end.y for t in cur)
+                # move one line past a horizontal trench
+                if ny == cy:
+                    ny = cy + 1
+                # does the next unused trench intersect the new line of interest
+                if n and n.pos.y < ny:
+                    ny = n.pos.y
+                # We now know how many lines share the same structure
+                count += subcount * (ny - cy)
+                # rebuild the current set based on what intersects the new line
+                cur = [t for t in cur if t.yintersects(ny)]
+                cy = ny
+                if n and n.pos.y == ny:
+                    # if we got to the next unsused trench then add it and
+                    # break out to possibly add more
+                    cur.append(n)
+                    break
+                if not cur:
+                    # we're done
+                    break
+                
         return count
 
 dir_map = {
