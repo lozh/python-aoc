@@ -120,18 +120,13 @@ class Dig:
                 last_pos = Pos(t.end.x + 1, t.end.y)
         return count
                             
-    # Embarassingly this worked after 75 minutes
-    # Really should take better advantage of the repating nature
-    # of lines by working out when they will change and multiplying
-    # the number of lines without change by the score for each line.
-    # sort the trenches by y, x of their top left, horizontal before vertical
-    # pop trenches off the list that cross y = 0 until we find one
+
+    # Sort the trenches by y, x of their top left, horizontal before vertical
+    # pop trenches off the list that cross current line until we find one
     # that doesn't.
     # From this, you can work out how many lines you can scan before
-    # you need to change the set. This will always happen when you hit
-    # horizontal edges (Either because you have some in the set to remove
-    # or you hit the y coordinate of the next edge, which will always be
-    # horizontal
+    # you need to change the current set of trenches
+    # You can then use the line score x line count to compute efficiently.
     def fill_count(self):
         count = 0
         subcount = 0
