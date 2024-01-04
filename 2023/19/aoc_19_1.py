@@ -25,7 +25,7 @@ class Condition:
             case '<':
                 return v < self.arg2
         raise ValueError("Broken Condition.ok({self}, part)")
-        
+
 @dataclass(frozen=True)
 class Rule:
     condition: Condition
@@ -36,7 +36,7 @@ class Rule:
             return True
         else:
             return self.condition.ok(part)
-        
+
 @dataclass(frozen=True)
 class Workflow:
     name: str
@@ -47,18 +47,18 @@ class Workflow:
             if r.ok(part):
                 return r.dest
         raise ValueError("Broken Workflow.dest({self, part})")
-        
+
 def parse_condition(s: str) -> Condition:
     if not s:
         return None
 
     m = re.match(r"([xmas])([<>])(\d+)", s)
     return Condition(m[1], m[2], int(m[3]))
-    
+
 def parse_rule(s: str) -> Rule:
     m = re.match(r"(?:([^:]+):)?(\w+)", s)
     return Rule(parse_condition(m[1]), m[2])
-    
+
 def parse_workflow(line: str) -> Workflow:
     m = re.match(r"(\w+)\{([^}]+)\}", line)
     name = m[1]
@@ -71,7 +71,7 @@ def parse_part(line: str):
     for a in m[1].split(","):
         e = re.match(r"([xmas])=(\d+)", a)
         vals[e[1]] = int(e[2])
-    
+
     return Part(vals)
 
 def parse(lines) -> (dict[str, Workflow], list[Part]):
@@ -81,7 +81,7 @@ def parse(lines) -> (dict[str, Workflow], list[Part]):
     while (line := next(lines)) != "":
         w = parse_workflow(line)
         workflows[w.name] = w
-        
+
     while line := next(lines, None):
         parts.append(parse_part(line))
 

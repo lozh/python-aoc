@@ -22,7 +22,7 @@ class ConditionSet:
 
     def __init__(self):
         self.conditions = {}
-        
+
     def add(self, condition: Condition):
         if condition.arg1 in self.conditions:
             cs = self.conditions[condition.arg1]
@@ -56,12 +56,12 @@ class ConditionSet:
                     h = c.arg2
             tot *= (h - l - 1)
         return tot
-    
+
 @dataclass(frozen=True)
 class Rule:
     condition: Condition
     dest: str
-        
+
 @dataclass(frozen=True)
 class Workflow:
     name: str
@@ -73,11 +73,11 @@ def parse_condition(s: str) -> Condition:
 
     m = re.match(r"([xmas])([<>])(\d+)", s)
     return Condition(m[1], m[2], int(m[3]))
-    
+
 def parse_rule(s: str) -> Rule:
     m = re.match(r"(?:([^:]+):)?(\w+)", s)
     return Rule(parse_condition(m[1]), m[2])
-    
+
 def parse_workflow(line: str) -> Workflow:
     m = re.match(r"(\w+)\{([^}]+)\}", line)
     name = m[1]
@@ -108,7 +108,7 @@ def find_condition_sets(workflows, current, conditions):
             yield (r.dest, cs)
         else:
             yield from find_condition_sets(workflows, workflows[r.dest], cs)
-                        
+
 lines = map(str.rstrip, sys.stdin)
 workflows = parse(lines)
 cs = find_condition_sets(workflows, workflows["in"], ConditionSet())
