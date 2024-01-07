@@ -105,7 +105,6 @@ def detect_cycles(modules, dest):
 # Add the extra module from the question
 rxin = [m.name for m in modules.values() if "rx" in m.dests]
 modules["rx"] = Untyped("rx", [], {n: False for n in rxin})
-print(rxin)
 
 # from inspection, there is only one node with rx as an output
 # from second inspection, each cycle is from the start, no offsets
