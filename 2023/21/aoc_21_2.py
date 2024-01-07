@@ -133,5 +133,3 @@ class Layout:
 layout = Layout(map(str.rstrip, sys.stdin))
 
 print(layout.frontier_size(26501365))
-
-
