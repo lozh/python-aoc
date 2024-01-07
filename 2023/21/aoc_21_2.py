@@ -110,9 +110,14 @@ class Layout:
             number_of_tiles = (moves + h) // (f + 1)
             moves_in_last_tile = (moves + h) % (f + 1)
             while number_of_tiles > 0:
-                # There's room for improvement here
-                # see whether all remaining tiles have reached their end state
-                # and multiply out etc
+                # At a certain point, all the tiles are filled out
+                # in either their odd or even configurations
+                if moves_in_last_tile >= end:
+                    odds = number_of_tiles // 2
+                    evens = (number_of_tiles + 1) // 2
+                    tot += evens * self.frontier_sizes[(pos, end - 1)]
+                    tot += odds * self.frontier_sizes[(pos, end - 2)]
+                    break
                 tot += self.frontier_size_tile(pos, moves_in_last_tile)
                 moves_in_last_tile += f + 1
                 number_of_tiles -= 1
@@ -124,6 +129,14 @@ class Layout:
             # on the diagnonal we get more tiles 
             while number_of_tiles > 0:
                 # same as cardinals, we can multiply out
+                if moves_in_last_tile >= end and moves_in_last_tile % 2 == 1:
+                    odds = number_of_tiles // 2
+                    evens = (number_of_tiles + 1) // 2
+                    odd_tiles = odds * number_of_tiles - odds * odds
+                    even_tiles = evens * number_of_tiles - evens * (evens - 1)
+                    tot += even_tiles * self.frontier_sizes[(pos, end - 2)]
+                    tot += odd_tiles * self.frontier_sizes[(pos, end - 1)]
+                    break
                 tot += number_of_tiles * self.frontier_size_tile(pos, moves_in_last_tile)
                 moves_in_last_tile += f + 1
                 number_of_tiles -= 1
@@ -133,3 +146,4 @@ class Layout:
 layout = Layout(map(str.rstrip, sys.stdin))
 
 print(layout.frontier_size(26501365))
+# print(layout.frontier_size(35))
