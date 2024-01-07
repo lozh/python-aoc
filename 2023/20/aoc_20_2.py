@@ -103,12 +103,13 @@ def detect_cycles(modules, dest):
                 cycles[p.src] = i
 
 # Add the extra module from the question
-rxin = {m.name: False for m in modules.values() if "rx" in m.dests}
-modules["rx"] = Untyped("rx", [], rxin)
+rxin = [m.name for m in modules.values() if "rx" in m.dests]
+modules["rx"] = Untyped("rx", [], {n: False for n in rxin})
+print(rxin)
 
-# from inspection, zh is the only node with rx as an output
+# from inspection, there is only one node with rx as an output
 # from second inspection, each cycle is from the start, no offsets
-cycles = [cycle for (src, count, cycle) in detect_cycles(modules, "zh")]
+cycles = [cycle for (src, count, cycle) in detect_cycles(modules, rxin[0])]
 print(lcm(*cycles))
 
 
