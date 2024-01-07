@@ -110,6 +110,3 @@ modules["rx"] = Untyped("rx", [], {n: False for n in rxin})
 # from second inspection, each cycle is from the start, no offsets
 cycles = [cycle for (src, count, cycle) in detect_cycles(modules, rxin[0])]
 print(lcm(*cycles))
-
-
-
