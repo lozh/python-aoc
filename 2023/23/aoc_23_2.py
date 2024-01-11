@@ -176,14 +176,13 @@ start = layout.start()
 end = layout.end()
 
 # The map is a number of long paths with the occasional choice
-# Built up a directed weighted graph
+# Build up a graph
 
 paths = layout.find_graph(start, 'S')
 
-# by inspection, the derived graph is a DAG
-# in which case we can solve by finding the shortest distance
-# for the negative weights.
-
+# With a non directed graph, this is NP-complete
+# can't see any shortcut, even though the graph is very regular
+# Just brute force (~20min on this old laptop)
 nodes = {path.start for path in paths.values()}.union({path.end for path in paths.values()})
 edges = list(paths.values())
 
