@@ -1,1 +1,3 @@
-input.ppm
+*.ppm
+*.png
+*.dot

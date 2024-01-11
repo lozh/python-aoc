@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import sys
+import math
 from dataclasses import dataclass
 
 directions = "NESW"
@@ -41,11 +42,7 @@ class Pos:
 class Path:
     start: Pos
     end: Pos
-    start_dir: str
-    end_dir: str
     length: int
-    forward: bool
-    backward: bool
 
 @dataclass
 class Layout:
@@ -59,7 +56,7 @@ class Layout:
         self.width = len(cells[0])
 
     def in_bounds(self, pos: Pos):
-        return pos.x >= 0 and pos.x < self.width - 1 and pos.y >= 0 and pos.y < self.height - 1
+        return pos.x >= 0 and pos.x < self.width and pos.y >= 0 and pos.y < self.height
 
     def directions(self, pos: Pos):
         for d in directions:
@@ -80,12 +77,7 @@ class Layout:
         return pos == self.start() or pos == self.end() or len(list(self.directions(pos))) > 2
 
     def trace_path(self, start: Pos, direction):
-        # can we follow this path forward?
-        forward = True
-        # can wer follow this path backward?
-        backward = True
         length = 1
-        start_dir = direction
         d = direction
         pos = start.neighbour(d)
         prev = start
@@ -97,15 +89,16 @@ class Layout:
                 case '.':
                     pass
                 case '^' | '>' | 'v' | '<':
-                    if cell == slope_map[d]:
-                        backward = False
-                    else:
-                        forward = False
-            if not forward and not backward:
-                return None
+                    if cell != slope_map[d]:
+                        return None
+
             if self.is_node(pos):
-                return Path(start, pos, start_dir, d, length, forward, backward)
+                # -length so we can solve DAG by Bellman Ford
+                return Path(start, pos, -length)
+
             for d, p in self.directions(pos):
+                # We will only find at most one direction
+                # otherwise this would be a node
                 if p != prev:
                     prev = pos
                     pos = p
@@ -115,6 +108,58 @@ class Layout:
                 # Path was a dead-end
                 return None
 
+    def find_graph(self, start: Pos, direction: str):
+        paths = {}
+        heads = [(start, direction)]
+
+        while heads:
+            pos, direction = heads.pop()
+            if path := self.trace_path(pos, direction):
+                paths[pos, direction] = path
+                for d, _ in self.directions(path.end):
+                    if (path.end, d) not in paths:
+                        heads.append((path.end, d))
+        return paths
+
+def graph_to_dot(paths, start, end):
+    node_map = {start: "start", end: "end"}
+    n = 'A'
+    print("digraph {")
+    for path in paths:
+        if path.start not in node_map:
+            node_map[path.start] = n
+            if n == 'Z':
+                n = 'a'
+            else:
+                n = chr(ord(n) + 1)
+        if path.end not in node_map:
+            node_map[path.end] = n
+            if n == 'Z':
+                n = 'a'
+            else:
+                n = chr(ord(n) + 1)
+        print(f"\t{node_map[path.start]} -> {node_map[path.end]} [label = {path.length}]")
+    print("}")
+
+# need an algorithm that works with negative edge weights
+def bellman_ford(nodes, edges, start, end):
+    dist = {}
+    prev = {}
+
+    for v in nodes:
+        dist[v] = 0 if v == start else math.inf
+        prev[v] = None
+
+    for _ in range(len(nodes) - 1):
+        for edge in edges:
+            u, v, w = edge.start, edge.end, edge.length
+            if dist[u] + w < dist[v]:
+                dist[v] = dist[u] + w
+                prev[v] = u
+
+    return dist[end]
+
+
 layout = Layout(list(map(str.rstrip, sys.stdin)))
 
 start = layout.start()
@@ -123,15 +168,12 @@ end = layout.end()
 # The map is a number of long paths with the occasional choice
 # Built up a directed weighted graph
 
-paths = {}
-heads = [(start, 'S')]
+paths = layout.find_graph(start, 'S')
 
-while heads:
-    pos, direction = heads.pop()
-    if path := layout.trace_path(pos, direction):
-        paths[pos, direction] = path
-        for d, _ in layout.directions(path.end):
-            if (path.end, d) not in paths:
-                heads.append((path.end, d))
+# by inspection, the derived graph is a DAG
+# in which case we can solve by finding the shortest distance
+# for the negative weights.
 
-print(paths)
+nodes = {path.start for path in paths.values()}.union({path.end for path in paths.values()})
+edges = list(paths.values())
+print(-bellman_ford(nodes, edges, start, end))
