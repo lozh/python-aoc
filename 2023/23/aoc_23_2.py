@@ -77,6 +77,18 @@ class Layout:
     def is_node(self, pos: Pos):
         return pos == self.start() or pos == self.end() or len(list(self.directions(pos))) > 2
 
+    # Neat trick stolen from Reddit
+    # If you hit the edge, you have divided your map into two
+    # You need to move into the part that has the exit
+    # This will always be east if you are on the top or bottom
+    # Or south is you are on the left or right
+    # More preciesely, if you find yourself hitting west on
+    # the top or bottom, or north on the left or right
+    # then you've gone wrong
+    # You should also be able to apply this optimisation
+    # To the simplified graph, but it's a bit more difficult
+    # Especially to do both
+    # Culling here cuts more edges than culling the graph
     def trace_path(self, start: Pos, direction):
         length = 1
         d = direction
@@ -105,6 +117,13 @@ class Layout:
                     break
             else:
                 # Path was a dead-end
+                return None
+
+            # See comment at top of function
+            # offset by one as the edge is wall
+            if (p.x == 1 or p.x == self.width - 2) and d == 'N':
+                return None
+            if (p.y == 1 or p.y == self.height - 2) and d == 'W':
                 return None
 
     def find_graph(self, start: Pos, direction: str):
@@ -161,7 +180,7 @@ paths = layout.find_graph(start, 'S')
 
 # With a non directed graph, this is NP-complete
 # can't see any shortcut, even though the graph is very regular
-# Just brute force (~20min on this old laptop)
+# Just brute force
 nodes = {path.start for path in paths.values()}.union({path.end for path in paths.values()})
 
 edges = defaultdict(list)
@@ -169,3 +188,4 @@ for path in paths.values():
     edges[path.start].append((path.end, path.length))
     
 print(longest_path(nodes, edges, start, end))
+
