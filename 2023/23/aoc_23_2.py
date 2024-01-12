@@ -3,6 +3,7 @@
 import sys
 import math
 from dataclasses import dataclass
+from collections import defaultdict
 
 directions = "NESW"
 
@@ -139,36 +140,14 @@ def graph_to_dot(paths, start, end):
         print(f"\t{node_map[path.start]} -> {node_map[path.end]} [label = {path.length}]")
     print("}")
 
-# need an algorithm that works with negative edge weights
-def bellman_ford(nodes, edges, start, end):
-    dist = {}
-    prev = {}
-
-    for v in nodes:
-        dist[v] = 0 if v == start else math.inf
-        prev[v] = None
-
-    for _ in range(len(nodes) - 1):
-        for edge in edges:
-            u, v, w = edge.start, edge.end, edge.length
-            if dist[u] + w < dist[v]:
-                dist[v] = dist[u] + w
-                prev[v] = u
-
-    return dist[end]
-
-
 def longest_path(nodes, edges, start, end):
-    def longest_path_r(nodes, edges, start, end, length, end_edges):
+    def longest_path_r(nodes, edges, start, end, length):
         if start == end:
             return length
-        if not any((n for n in nodes if n in end_edges)):
-            return -math.inf
         nodes = nodes - {start}
-        neighbours = ((path.end, path.length) for path in edges if path.start == start and path.end in nodes)
-        return max((longest_path_r(nodes, edges, s, end, length + l, end_edges) for s, l in neighbours), default = -math.inf)
-    end_edges = {path.start for path in edges if path.end == end}
-    return longest_path_r(nodes, edges, start, end, 0, end_edges)
+        neighbours = ((pe, pl) for (pe, pl) in edges[start] if pe in nodes)
+        return max((longest_path_r(nodes, edges, s, end, length + l) for s, l in neighbours), default = -math.inf)
+    return longest_path_r(nodes, edges, start, end, 0)
 
 layout = Layout(list(map(str.rstrip, sys.stdin)))
 
@@ -184,6 +163,9 @@ paths = layout.find_graph(start, 'S')
 # can't see any shortcut, even though the graph is very regular
 # Just brute force (~20min on this old laptop)
 nodes = {path.start for path in paths.values()}.union({path.end for path in paths.values()})
-edges = list(paths.values())
 
+edges = defaultdict(list)
+for path in paths.values():
+    edges[path.start].append((path.end, path.length))
+    
 print(longest_path(nodes, edges, start, end))
