@@ -3,8 +3,14 @@
 import sys
 import re
 from collections import defaultdict
+from dataclasses import dataclass, field
 import math
-# from heapq import heappush, heappop
+from heapq import heappush, heappop
+
+@dataclass(order=True)
+class Priority:
+    priority: int
+    item: str = field(compare=False)
 
 def link_count(aset, y, edges):
     return sum(edges[y][e] for e in edges[y] if e in aset)
@@ -12,12 +18,30 @@ def link_count(aset, y, edges):
 def cut_of_the_phase(vertices, edges, a):
     aset = {a}
     t = a
-    rest = {v for v in vertices if v != a}
+    rest = []
+    entry_finder = {}
+
+    for v in vertices:
+        if v != a:
+            # use negative priority as we need to find max
+            entry = Priority(-link_count(aset, v, edges), v)
+            entry_finder[v] = entry
+            heappush(rest, entry)
+
     while len(aset) < len(vertices):
         s = t
-        t = max(rest, key = lambda x: link_count(aset, x, edges))
-        rest.remove(t)
+        while not (t:= heappop(rest).item):
+            pass
+        del entry_finder[t]
         aset.add(t)
+        for v in edges[t]:
+            if v not in aset:
+                # update priority by tombstoning and re-adding
+                entry = entry_finder.pop(v)
+                entry.item = None
+                entry = Priority(entry.priority - edges[t][v], v)
+                entry_finder[v] = entry
+                heappush(rest, entry)
     return s, t
 
 def merge_vertices(vertices, edges, s, t):
