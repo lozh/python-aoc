@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-
 import sys
 
 def find_vertical_mirror(layout):
@@ -53,7 +52,7 @@ def lines_to_maps(lines):
             yield m
             m = []
     yield m
-    
+
 lines = map(str.rstrip, sys.stdin)
 maps = lines_to_maps(lines)
 print(sum(map(score, maps)))
