@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-
 import sys
 from itertools import product
 
@@ -17,9 +16,6 @@ def find_vertical_mirror(layout):
         if match:
             yield i
 
-# returns (bool, int)
-# bool is True if found
-# int is the row
 def find_horizontal_mirror(layout):
     l = len(layout)
     for i in range(l - 1):
@@ -48,11 +44,7 @@ def score(layout):
         for s in find_vertical_mirror(l):
             if not (not is_h and s == os):
                 return s + 1
-
-    for line in layout:
-        print(''.join(list(map(lambda x: '#' if x else '.', line))))
-    print("No Answer")
-    return None
+    raise ValueError("No Answer")
 
 def permute(layout):
     height = len(layout)
@@ -71,7 +63,7 @@ def lines_to_maps(lines):
             yield m
             m = []
     yield m
-    
+
 lines = map(str.rstrip, sys.stdin)
 maps = lines_to_maps(lines)
 print(sum(map(score, maps)))
