@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-
 import sys
 
 # map of input direction, pipe -> output direction
@@ -17,6 +16,7 @@ dirs = {
     ('N', 'F'): 'E',
     ('W', 'F'): 'S',
 }
+
 # map of start direction, end direction -> start pipe
 starts = {
     ('N', 'N'): '|',
@@ -64,7 +64,7 @@ def find_start(m):
     for y, line in enumerate(m):
         if 'S' in line:
             return line.index('S'), y
-    print("No Start")
+    raise ValueError("No Start")
 
 def in_bounds(m, x, y):
     return x >= 0 and x < len(m[0]) and y >= 0 and y < len(m)
@@ -91,7 +91,7 @@ def find_loop(m, start):
             if (cur_dir, cell) not in dirs:
                 break
             cur_dir = dirs[(cur_dir, cell)]  
-    print("No Loop")
+    raise ValueError("No Loop")
 
 # Build a bitmap of the loop
 # each cell is a 3 x 3 bitmap
