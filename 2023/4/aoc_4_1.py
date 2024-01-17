@@ -1,10 +1,8 @@
 #!/usr/bin/env python3
-
 import sys
 import re
 import string
 from dataclasses import dataclass
-
 
 @dataclass
 class Game:
@@ -32,4 +30,3 @@ def score_game(game):
 stdin = map(str.rstrip, sys.stdin)
 games = map(parse_game, stdin)
 print(sum(map(score_game, games)))
-
