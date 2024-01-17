@@ -93,8 +93,7 @@ def all_block_fall_count(blocks):
 # Could speed some of these up by keeping two maps
 # height -> block based on top/bottom
 lines = map(str.rstrip, sys.stdin)
-blocks = list(map(parse, lines))
-
+blocks = sorted(map(parse, lines), key = lambda b: b.bottom())
 blocks = apply_gravity(blocks)
 
 print(all_block_fall_count(blocks))
