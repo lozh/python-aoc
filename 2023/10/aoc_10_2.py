@@ -146,4 +146,3 @@ filled_bitmap = flood_fill(bitmap, start_fill)
 total = sum(1 for x in range(len(pipemap[0])) for y in range(len(pipemap)) if bitmap[y * 3 + 1][x * 3 + 1])
 # All the pipe bit maps also have their centre pixel set
 print(total - len(loop))
-
