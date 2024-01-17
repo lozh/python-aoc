@@ -11,8 +11,8 @@ offsets = {
     '<': (-1, 0),
 }
 
-def tuple_add(x, y):
-    return tuple(a + b for (a, b) in zip(x, y))
+def tuple_add(*t):
+    return tuple(map(sum, zip(*t)))
 
 def simulate_path(start, path, f):
     for x in (x for i, x in enumerate(path) if f(i)):
