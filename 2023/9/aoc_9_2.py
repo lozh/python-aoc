@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-
 from itertools import pairwise
 import sys
 
@@ -21,4 +20,3 @@ lines = map(str.rstrip, sys.stdin)
 seqs = map(parse, lines)
 
 print(sum(map(extrapolate, seqs)))
-
