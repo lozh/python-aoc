@@ -3,11 +3,17 @@
 from math import sqrt, floor, ceil
 import sys
 
+# Distance follows a quadratic, so we can solve for the intercepts
+# Need to be slightly careful if the roots are exact
+# As these would only equal the time, not beat it
 def win_comb(time, record):
-    # This probably doesn't work if the roots are exact
     s1 = (time + sqrt(time * time - 4 * record)) / 2
     s2 = (time - sqrt(time * time - 4 * record)) / 2
-    return floor(s1) - ceil(s2) + 1
+    root = int(sqrt(time * time - 4 * record))
+    r = floor(s1) - ceil(s2) + 1
+    if root * root == time * time - 4 * record:
+        r -= 2
+    return r
 
 times = next(sys.stdin).split(":")[1].split()
 distances = next(sys.stdin).split(":")[1].split()

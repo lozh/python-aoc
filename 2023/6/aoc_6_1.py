@@ -1,27 +1,26 @@
 #!/usr/bin/env python3
 
-import re
 import sys
-from dataclasses import dataclass
+from math import sqrt, floor, ceil
 from functools import reduce
 from operator import mul
 
 def prod(iter):
     return reduce(mul, iter, 1)
 
-@dataclass
-class Race:
-    time: int
-    record: int
+# Distance follows a quadratic, so we can solve for the intercepts
+# Need to be slightly careful if the roots are exact
+# As these would only equal the time, not beat it
+def win_comb(time, record):
+    s1 = (time + sqrt(time * time - 4 * record)) / 2
+    s2 = (time - sqrt(time * time - 4 * record)) / 2
+    root = int(sqrt(time * time - 4 * record))
+    r = floor(s1) - ceil(s2) + 1
+    if root * root == time * time - 4 * record:
+        r -= 2
+    return r
 
-    def distance(self, press):
-        return (self.time - press) * press
+times = map(int, next(sys.stdin).split(":")[1].split())
+distances = map(int, next(sys.stdin).split(":")[1].split())
 
-    def win_comb(self):
-        return sum(1 for i in range(self.time) if self.distance(i) > self.record)
-
-times = next(sys.stdin).split(":")[1].split()
-distances = next(sys.stdin).split(":")[1].split()
-races = [Race(int(t), int(d)) for (t, d) in zip(times, distances)]
-
-print(prod(map(lambda x: x.win_comb(), races)))
+print(prod(map(lambda z: win_comb(*z), zip(times, distances))))
