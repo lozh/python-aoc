@@ -34,13 +34,13 @@ def adjacent_cells(x, y, bounds):
 
 def is_symbol_adjacent_to_cell(x, y, grid, bounds):
     return any(is_symbol(grid[j][i]) for (i, j) in adjacent_cells(x, y, bounds))
-        
+
 def is_symbol_adjacent_to_number(number, grid, bounds):
     n, x, y, l = number
     r = any(is_symbol_adjacent_to_cell(i, y, grid, bounds) for i in range(x, x + l))
     #print(f"{number}, {r}")
     return r
-    
+
 def scan_for_part_numbers(grid, bounds):
     numbers = scan_for_numbers(grid)
     part_numbers = (n[0] for n in numbers if is_symbol_adjacent_to_number(n, grid, bounds))
