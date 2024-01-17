@@ -17,7 +17,7 @@ def parse_line(line):
 
 def parse(lines):
     return {key: value for key, value in map(parse_line, lines)}
-    
+
 lines = map(str.rstrip, sys.stdin)
 
 moves = next(lines)
@@ -28,7 +28,6 @@ net = parse(lines)
 # array of dictionaries, each with location -> cycle#
 # where cycle is one complete run of moves
 curr = (k for k in net if k[2] == 'A')
-
 
 # After inspection, every start hits an end after using all the
 # moves many times. This then repeats.
@@ -51,5 +50,3 @@ for c in curr:
         c = net[c].left if move == 'L' else net[c].right
 
 print(lcm(*generators))
-
-

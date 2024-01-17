@@ -16,7 +16,7 @@ def parse_line(line):
 
 def parse(lines):
     return {key: value for key, value in map(parse_line, lines)}
-    
+
 lines = map(str.rstrip, sys.stdin)
 
 moves = next(lines)
