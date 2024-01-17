@@ -70,4 +70,4 @@ games = map(lambda x: parse(str.rstrip(x)), sys.stdin)
 
 g = sorted(games, key = cmp_to_key(Game.cmp), reverse = True)
 scores = map(lambda xg: xg[0] * xg[1].bid, enumerate(g, start = 1))
-print(sum(list(scores)))
+print(sum(scores))
