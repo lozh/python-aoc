@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-
 import sys
 import re
 
@@ -13,7 +12,6 @@ class MapEntry:
 
     def as_range(self):
         return Range(self.src, self.length)
-
 
 @dataclass
 class Map:
@@ -55,7 +53,7 @@ class Range:
 
     def end(self):
         return self.start + self.length
-    
+
     def intersect(self, range):
         istart = max(self.start, range.start)
         iend = min(self.end(), range.end())
@@ -86,8 +84,7 @@ def parse_seeds(pairs):
         pairs = pairs[2:]
         seeds.append(Range(start, length))
     return seeds
-    
-            
+
 def parse(stdin):
     state = 0
     maps = []
@@ -119,7 +116,6 @@ def parse(stdin):
 
     maps.append(Map(src, dest, entries))
     return Almanac(seeds, maps)
-                
 
 a = parse(map(str.rstrip, sys.stdin))
 sm = a.seed_map()
