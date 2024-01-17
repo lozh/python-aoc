@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-
 import sys
 from dataclasses import dataclass
 from collections import Counter
@@ -19,8 +18,7 @@ class HandType(IntEnum):
     HIGH_CARD = 7
 
 def cards_to_type(cards: str) -> HandType:
-    counts = list(Counter(cards).values())
-    counts.sort(reverse = True)
+    counts = sorted(Counter(cards).values(), reverse = True)
     if counts[0] == 5:
         return HandType.FIVE_OF_A_KIND
     if counts[0] == 4:
@@ -34,7 +32,7 @@ def cards_to_type(cards: str) -> HandType:
     if counts[0] == 2:
         return HandType.ONE_PAIR
     return HandType.HIGH_CARD
-    
+
 @dataclass
 class Game:
     cards: str

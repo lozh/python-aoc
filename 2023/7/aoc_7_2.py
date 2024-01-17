@@ -1,10 +1,8 @@
 #!/usr/bin/env python3
-
 import sys
 from dataclasses import dataclass
 from collections import Counter
 from enum import IntEnum
-from operator import attrgetter
 from functools import cmp_to_key
 
 cards = list("AKQT98765432J")
@@ -40,7 +38,7 @@ def cards_to_type(cards: str) -> HandType:
     if counts[0] == 2:
         return HandType.ONE_PAIR
     return HandType.HIGH_CARD
-    
+
 @dataclass
 class Game:
     cards: str
