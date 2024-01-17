@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-
 import sys
 
 def get_groups(arrangement):
@@ -16,7 +15,7 @@ def get_groups(arrangement):
             i = True
     if c > 0:
         yield c
-    
+
 def is_valid(arrangement, groups):
     return list(get_groups(arrangement)) == groups
 
@@ -45,4 +44,3 @@ def count_arrangements(pattern, groups):
 stdin = map(str.rstrip, sys.stdin)
 
 print(sum(count_arrangements(p, g) for (p, g) in map(parse, stdin)))
-
