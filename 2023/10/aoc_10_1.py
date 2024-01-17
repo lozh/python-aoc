@@ -29,6 +29,7 @@ def find_start(m):
     for y, line in enumerate(m):
         if 'S' in line:
             return line.index('S'), y
+
 def in_bounds(m, x, y):
     return x >= 0 and x < len(m[0]) and y >= 0 and y < len(m)
 
@@ -53,9 +54,6 @@ def find_loop_size(m, start):
     raise ValueError("No Loop")
 
 pipemap = list(map(str.rstrip, sys.stdin))
-
 start = find_start(pipemap)
-
 size = find_loop_size(pipemap, start)
-
 print (int(size / 2))
