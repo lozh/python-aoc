@@ -27,6 +27,9 @@ class Block:
     def move_down(self):
         return Block(frozenset((x, y, z - 1) for (x, y, z) in self.cubes))
 
+    def bottom_cube(self):
+        return min(self.cubes, key = lambda x: x[2])
+
     def bottom(self):
         return min(z for (_, _, z) in self.cubes)
 
@@ -42,9 +45,11 @@ def parse(line):
 
 def overlap(cubes, before, after):
     if before.height() > 1:
-        # remove the current block from cubes before looking for intersection
-        # if not a vertical block will overlap with itself
-        return cubes.difference(before.cubes).intersection(after.cubes)
+        # The more general way to do this is to do the
+        # intersection with after - before
+        # But we know cubes only protrude in one dimension
+        bc = after.bottom_cube()
+        return {bc} if bc in cubes else set()
     else:
         return cubes.intersection(after.cubes)
 
