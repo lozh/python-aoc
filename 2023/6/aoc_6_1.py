@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 
+import re
+import sys
 from dataclasses import dataclass
 from functools import reduce
 from operator import mul
@@ -18,8 +20,8 @@ class Race:
     def win_comb(self):
         return sum(1 for i in range(self.time) if self.distance(i) > self.record)
 
-    
-test = [Race(7, 9), Race(15, 40), Race(30, 200)]
-actual = [Race(61, 643), Race(70, 1184), Race(90, 1362), Race(66, 1041)]
+times = next(sys.stdin).split(":")[1].split()
+distances = next(sys.stdin).split(":")[1].split()
+races = [Race(int(t), int(d)) for (t, d) in zip(times, distances)]
 
-print(prod(map(lambda x: x.win_comb(), actual)))
+print(prod(map(lambda x: x.win_comb(), races)))
