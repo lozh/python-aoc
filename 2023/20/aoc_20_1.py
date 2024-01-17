@@ -3,7 +3,7 @@
 import sys
 import re
 from dataclasses import dataclass, field
-
+from collections import deque
 
 @dataclass
 class Module:
@@ -46,7 +46,7 @@ class Untyped(Module):
     def process(self, pulse: Pulse):
         pass
 
-# line -> (name, type, list[dest])
+# line -> Module
 def parse(line):
     m = re.match(r"([%&])?(\w+) -> (.*)", line)
     name = m[2]
@@ -62,15 +62,13 @@ def parse(line):
     raise ValueError(f"Couldn't parse {line}")
 
 def simulate(modules):
-    pulses = [Pulse("button", False, "broadcaster")]
+    pulses = deque([Pulse("button", False, "broadcaster")])
     while pulses:
-        new_pulses = []
-        for p in pulses:
-            yield p
-            if p.dest in modules:
-                m = modules[p.dest]
-                new_pulses.extend(m.process(p))
-        pulses = new_pulses
+        p = pulses.popleft()
+        yield p
+        if p.dest in modules:
+            m = modules[p.dest]
+            pulses.extend(m.process(p))
 
 lines = map(str.rstrip, sys.stdin)
 modules = {m.name: m for m in map(parse, lines) }
