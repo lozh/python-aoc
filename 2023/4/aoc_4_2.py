@@ -1,10 +1,8 @@
 #!/usr/bin/env python3
-
 import sys
 import re
 import string
 from dataclasses import dataclass
-
 
 @dataclass
 class Game:

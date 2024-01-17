@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-
 import sys
 import re
 
@@ -63,7 +62,6 @@ def parse(stdin):
 
     maps.append(Map(src, dest, entries))
     return Almanac(seeds, maps)
-                
 
 a = parse(map(str.rstrip, sys.stdin))
 # print(a)
