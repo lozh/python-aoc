@@ -40,7 +40,7 @@ def get_adjacent_gear_positions(number, grid, bounds):
 
 def nums_to_gear_positions(numbers, grid, bounds):
     yield from (get_adjacent_gear_positions(number, grid, bounds) for number in numbers)
-    
+
 def collate_gears(gear_positions):
     r = {}
     # not quite sure how I've got an extra level of indirection here
