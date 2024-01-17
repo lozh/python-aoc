@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-
 import sys
 from itertools import repeat
 from functools import lru_cache
@@ -73,8 +72,7 @@ def chop(pattern, pg, groups):
                         s = 1
                     case '?':
                         if s != 2:
-                            print("Broken")
-                            return None
+                            raise ValueError("Broken")
                         pattern = pattern[j:]
                         break
     return (pattern, pg, groups)
@@ -101,7 +99,6 @@ def count_perms(pattern, groups):
     else:
         return 0
 
-
 def parse(line):
     pattern, groups = line.split()
     pattern = '?'.join(repeat(pattern, 5))
@@ -110,10 +107,4 @@ def parse(line):
 
 stdin = map(str.rstrip, sys.stdin)
 
-#for (p, g) in map(parse, stdin):
-#    print(p, g)
-#    print(count_perms(p, g))
-#    print(count_perms.cache_info())
-          
 print(sum(count_perms(p, g) for (p, g) in map(parse, stdin)))
-
