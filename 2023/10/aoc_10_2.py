@@ -65,7 +65,7 @@ def find_start(m):
         if 'S' in line:
             return line.index('S'), y
     print("No Start")
-    
+
 def in_bounds(m, x, y):
     return x >= 0 and x < len(m[0]) and y >= 0 and y < len(m)
 
@@ -128,7 +128,7 @@ def flood_fill(bitmap, start):
                 if not bitmap[j][i]:
                     new_frontier.add((i, j))
         frontier = new_frontier
-            
+
     return bitmap
 
 pipemap = list(map(str.rstrip, sys.stdin))
