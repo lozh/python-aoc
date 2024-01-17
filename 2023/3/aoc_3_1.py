@@ -51,6 +51,3 @@ grid = list(stdin)
 # minx, miny, maxx, maxy
 bounds = (0, 0, len(grid[0]), len(grid))
 print(sum(scan_for_part_numbers(grid, bounds)))
-
-
-

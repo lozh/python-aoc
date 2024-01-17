@@ -66,6 +66,3 @@ gear_positions = nums_to_gear_positions(numbers, grid, bounds)
 gears = collate_gears(gear_positions)
 
 print(sum(score_gears(gears)))
-
-
-
