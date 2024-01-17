@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-
 import sys
 
 # map of input direction, pipe -> output direction
@@ -51,9 +50,8 @@ def find_loop_size(m, start):
             if (cur_dir, cell) not in dirs:
                 break
             cur_dir = dirs[(cur_dir, cell)]  
-    print("No Loop")
-            
-        
+    raise ValueError("No Loop")
+
 pipemap = list(map(str.rstrip, sys.stdin))
 
 start = find_start(pipemap)
@@ -61,5 +59,3 @@ start = find_start(pipemap)
 size = find_loop_size(pipemap, start)
 
 print (int(size / 2))
-
-    
