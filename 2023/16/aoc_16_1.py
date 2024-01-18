@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-
 import sys
 
 from dataclasses import dataclass
@@ -16,7 +15,7 @@ class Pos:
 
     def next(self, direction):
         return Pos(self.x + direction.x, self.y + direction.y)
-    
+
 @dataclass(frozen=True)
 class Beam:
     pos: Pos
@@ -29,7 +28,7 @@ class Beam:
 
 def in_bounds(width, height, pos):
     return pos.x >= 0 and pos.x < width and pos.y >= 0 and pos.y < height
-    
+
 light_heads = {Beam(Pos(0, 0), Direction(1, 0))}
 light_trails = set()
 
@@ -44,7 +43,7 @@ while light_heads:
     for beam in light_heads:
         if beam in light_trails or not in_bounds(width, height, beam.pos):
             continue
-        
+
         light_trails.add(beam)
         tile = layout[beam.pos.y][beam.pos.x]
         match tile, beam.direction.x, beam.direction.y:
