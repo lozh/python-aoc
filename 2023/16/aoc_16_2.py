@@ -1,7 +1,5 @@
 #!/usr/bin/env python3
-
 import sys
-
 from dataclasses import dataclass
 
 @dataclass(frozen=True)
@@ -16,7 +14,7 @@ class Pos:
 
     def next(self, direction):
         return Pos(self.x + direction.x, self.y + direction.y)
-    
+
 @dataclass(frozen=True)
 class Beam:
     pos: Pos
@@ -38,7 +36,7 @@ def illumination_count(layout, initial_beam, width, height):
         for beam in light_heads:
             if beam in light_trails or not in_bounds(width, height, beam.pos):
                 continue
-        
+
             light_trails.add(beam)
             tile = layout[beam.pos.y][beam.pos.x]
             match tile, beam.direction.x, beam.direction.y:
