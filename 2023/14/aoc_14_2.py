@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-
 import sys
 from itertools import product
 
@@ -24,7 +23,7 @@ def move_east(layout, height, width):
             layout[j][i + 1] = 'O'
             layout[j][i] = '.'
             c += 1
-            
+
     return c, layout
 
 def move_south(layout, height, width):
@@ -71,7 +70,7 @@ for x in range(rounds):
     m = 1
     while m > 0:
         m, layout = move_west(layout, height, width)
-        
+
     m = 1
     while m > 0:
         m, layout = move_south(layout, height, width)
@@ -93,4 +92,3 @@ for x in range(rounds):
 
     layout_map[layout_key] = x
     layout_list.append(layout_key)
-    
