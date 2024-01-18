@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import sys
 from dataclasses import dataclass
+from functools import cache
 
 @dataclass(frozen=True)
 class Direction:
@@ -33,6 +34,38 @@ class Beam:
 def in_bounds(width, height, pos):
     return pos.x >= 0 and pos.x < width and pos.y >= 0 and pos.y < height
 
+@cache
+def next_beams(tile, beam):
+    match tile, beam.direction.x, beam.direction.y:
+        case '.', _, _:
+            return [beam.next()]
+        case ('|', 0, 1) | ('|', 0, -1):
+            return [beam.next()]
+        case ('|', 1, 0) | ('|', -1, 0):
+            return [beam.next(north), beam.next(south)]
+        case ('-', 0, 1) | ('-', 0, -1):
+            return [beam.next(west), beam.next(east)]
+        case ('-', 1, 0) | ('-', -1, 0):
+            return [beam.next()]
+        case '\\', 0, 1:
+            return [beam.next(east)]
+        case '\\', 0, -1:
+            return [beam.next(west)]
+        case '\\', 1, 0:
+            return [beam.next(south)]
+        case '\\', -1, 0:
+            return [beam.next(north)]
+        case '/', 0, 1:
+            return [beam.next(west)]
+        case '/', 0, -1:
+            return [beam.next(east)]
+        case '/', 1, 0:
+            return [beam.next(north)]
+        case '/', -1, 0:
+            return [beam.next(south)]
+        case _:
+            raise ValueError(f"broken {tile}, {beam}")
+
 def illumination_count(layout, initial_beam, width, height):
     light_trails = set()
     light_heads = {initial_beam}
@@ -44,37 +77,7 @@ def illumination_count(layout, initial_beam, width, height):
 
             light_trails.add(beam)
             tile = layout[beam.pos.y][beam.pos.x]
-            match tile, beam.direction.x, beam.direction.y:
-                case '.', _, _:
-                    next_heads.add(beam.next())
-                case ('|', 0, 1) | ('|', 0, -1):
-                    next_heads.add(beam.next())
-                case ('|', 1, 0) | ('|', -1, 0):
-                    next_heads.add(beam.next(north))
-                    next_heads.add(beam.next(south))
-                case ('-', 0, 1) | ('-', 0, -1):
-                    next_heads.add(beam.next(west))
-                    next_heads.add(beam.next(east))
-                case ('-', 1, 0) | ('-', -1, 0):
-                    next_heads.add(beam.next())
-                case '\\', 0, 1:
-                    next_heads.add(beam.next(east))
-                case '\\', 0, -1:
-                    next_heads.add(beam.next(west))
-                case '\\', 1, 0:
-                    next_heads.add(beam.next(south))
-                case '\\', -1, 0:
-                    next_heads.add(beam.next(north))
-                case '/', 0, 1:
-                    next_heads.add(beam.next(west))
-                case '/', 0, -1:
-                    next_heads.add(beam.next(east))
-                case '/', 1, 0:
-                    next_heads.add(beam.next(north))
-                case '/', -1, 0:
-                    next_heads.add(beam.next(south))
-                case _:
-                    raise Exception(f"broken {tile}, {beam}")
+            next_heads.update(next_beams(tile, beam))
 
         light_heads = next_heads
 
@@ -94,3 +97,4 @@ ib_south = [Beam(Pos(i, 0), Direction(0, 1)) for i in range(width)]
 initial_beams = ib_east + ib_west + ib_north + ib_south
 
 print(max(map(lambda ib: illumination_count(layout, ib, width, height), initial_beams)))
+
