@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-
 import sys
 import re
 from dataclasses import dataclass
@@ -18,7 +17,7 @@ class Op:
     label: str
     remove: bool
     focal_length: int
-    
+
 boxes = {}
 
 def hash(s):
@@ -48,7 +47,7 @@ for op in map(parse, line.split(",")):
             lens.focal_length = op.focal_length
         else:
             box.lenses.append(Lens(op.label, op.focal_length))
-        
+
     boxes[box_id] = box
 
 s = 0
