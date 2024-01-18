@@ -1,11 +1,9 @@
 #!/usr/bin/env python3
-
 import sys
 import math
 from dataclasses import dataclass, field
 from enum import Enum, auto
 from heapq import heappush, heappop
-
 
 class Direction(Enum):
     NONE = auto()
@@ -78,7 +76,6 @@ class Layout:
             for line in self.cells:
                 yield ''.join(map(str, line))
         return '\n'.join(strlines())
-
 
 @dataclass(frozen=True)
 class Vertex:
