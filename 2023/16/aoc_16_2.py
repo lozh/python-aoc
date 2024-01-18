@@ -7,6 +7,11 @@ class Direction:
     x: int
     y: int
 
+north = Direction(0, -1)
+east = Direction(1, 0)
+south = Direction(0, 1)
+west = Direction(-1, 0)
+
 @dataclass(frozen=True)
 class Pos:
     x: int
@@ -45,29 +50,29 @@ def illumination_count(layout, initial_beam, width, height):
                 case ('|', 0, 1) | ('|', 0, -1):
                     next_heads.add(beam.next())
                 case ('|', 1, 0) | ('|', -1, 0):
-                    next_heads.add(beam.next(Direction(0, 1)))
-                    next_heads.add(beam.next(Direction(0, -1)))
+                    next_heads.add(beam.next(north))
+                    next_heads.add(beam.next(south))
                 case ('-', 0, 1) | ('-', 0, -1):
-                    next_heads.add(beam.next(Direction(1, 0)))
-                    next_heads.add(beam.next(Direction(-1, 0)))
+                    next_heads.add(beam.next(west))
+                    next_heads.add(beam.next(east))
                 case ('-', 1, 0) | ('-', -1, 0):
                     next_heads.add(beam.next())
                 case '\\', 0, 1:
-                    next_heads.add(beam.next(Direction(1, 0)))
+                    next_heads.add(beam.next(east))
                 case '\\', 0, -1:
-                    next_heads.add(beam.next(Direction(-1, 0)))
+                    next_heads.add(beam.next(west))
                 case '\\', 1, 0:
-                    next_heads.add(beam.next(Direction(0, 1)))
+                    next_heads.add(beam.next(south))
                 case '\\', -1, 0:
-                    next_heads.add(beam.next(Direction(0, -1)))
+                    next_heads.add(beam.next(north))
                 case '/', 0, 1:
-                    next_heads.add(beam.next(Direction(-1, 0)))
+                    next_heads.add(beam.next(west))
                 case '/', 0, -1:
-                    next_heads.add(beam.next(Direction(1, 0)))
+                    next_heads.add(beam.next(east))
                 case '/', 1, 0:
-                    next_heads.add(beam.next(Direction(0, -1)))
+                    next_heads.add(beam.next(north))
                 case '/', -1, 0:
-                    next_heads.add(beam.next(Direction(0, 1)))
+                    next_heads.add(beam.next(south))
                 case _:
                     raise Exception(f"broken {tile}, {beam}")
 
