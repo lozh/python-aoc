@@ -1,11 +1,9 @@
 #!/usr/bin/env python3
-
 import sys
 import math
 from dataclasses import dataclass, field
 from enum import Enum, auto
 from heapq import heappush, heappop
-
 
 class Direction(Enum):
     NONE = auto()
@@ -56,7 +54,7 @@ class Pos:
         if self.y == height - 1 and direction == Direction.NORTH:
             return False
         return True
-    
+
 @dataclass(frozen=True)
 class Layout:
     cells: list[list[int]]
@@ -69,16 +67,15 @@ class Layout:
 
     def height(self):
         return len(self.cells)
-    
+
     def __getitem__(self, key):
         return self.cells[key.y][key.x]
-        
+
     def __str__(self):
         def strlines():
             for line in self.cells:
                 yield ''.join(map(str, line))
         return '\n'.join(strlines())
-
 
 @dataclass(frozen=True)
 class Vertex:
@@ -122,11 +119,11 @@ def min_heat_loss(start, end, vertices, layout):
 
     while q:
         u = heappop(q).item
-        
+
         if not u:
             # ignore tombstones
             continue
-        
+
         del entry_finder[u]
         for v in u.neighbours(width, height):
             alt = dist[u] + layout[v.pos]
@@ -140,11 +137,10 @@ def min_heat_loss(start, end, vertices, layout):
                 heappush(q, entry)
 
     return min(d for k, d in dist.items() if k.pos == end)
-    
+
 layout = Layout(map(str.rstrip, sys.stdin))
 width, height = layout.width(), layout.height()
 end = Pos(width - 1, height - 1)
-
 
 start = Vertex(Pos(0, 0), Direction.NONE, 0)
 vertices = [start]
@@ -153,6 +149,5 @@ for p in (Pos(i, j) for i in range(width) for j in range(height)):
     for d in (d for d in Direction if p.is_possible(d, width, height)):
         for c in range(3):
             vertices.append(Vertex(p, d, c))
-
 
 print(min_heat_loss(start, end, vertices, layout))
