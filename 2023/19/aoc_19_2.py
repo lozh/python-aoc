@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-
 import sys
 import re
 from dataclasses import dataclass
@@ -99,7 +98,7 @@ def find_condition_sets(workflows, current, conditions):
         cs = deepcopy(conditions)
         for nn in negative_conditions:
             cs.add(nn)
-            
+
         if r.condition:
             cs.add(r.condition)
             negative_conditions.append(r.condition.negate())
@@ -114,5 +113,3 @@ workflows = parse(lines)
 cs = find_condition_sets(workflows, workflows["in"], ConditionSet())
 
 print(sum(c.score(0, 4001) for d, c in cs if d == 'A'))
-
-
