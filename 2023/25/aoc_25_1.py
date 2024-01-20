@@ -12,9 +12,6 @@ class Priority:
     priority: int
     item: str = field(compare=False)
 
-def link_count(aset, y, edges):
-    return sum(edges[y][e] for e in edges[y] if e in aset)
-
 def cut_of_the_phase(vertices, edges, a):
     aset = {a}
     t = a
@@ -24,7 +21,7 @@ def cut_of_the_phase(vertices, edges, a):
     for v in vertices:
         if v != a:
             # use negative priority as we need to find max
-            entry = Priority(-link_count(aset, v, edges), v)
+            entry = Priority(-edges[a][v] if v in edges[a] else 0, v)
             entry_finder[v] = entry
             heappush(rest, entry)
 
