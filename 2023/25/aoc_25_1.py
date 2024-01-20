@@ -49,7 +49,6 @@ def merge_vertices(vertices, edges, s, t):
             w = edges[t][v] + edges[s].get(v, 0)
             edges[s][v] = w
             edges[v][s] = w
-    # probably don't need to actually do this
     for v in edges[t]:
         del edges[v][t]
     del edges[t]
