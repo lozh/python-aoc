@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-
 import sys
 import re
 
@@ -15,6 +14,7 @@ dir_map = {
     '3': 'U',
 }
 
+# This just outputs a new input for the solver from part 1
 lines = map(str.rstrip, sys.stdin)
 for (a, b) in map(parse, lines):
     print(f"{b} {a}")
